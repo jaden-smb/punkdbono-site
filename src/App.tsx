@@ -1,16 +1,24 @@
 import { useRef, useState, Suspense, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, OrbitControls, PresentationControls, Stage, Environment } from '@react-three/drei'
+import { Group } from 'three'
 import './App.css'
 
+// Define prop types for components
+interface DioramaModelProps {
+  isRotating: boolean;
+  onClick?: () => void;
+  [key: string]: any; // For other props that might be passed
+}
+
 // Diorama model component with enhanced styling
-function DioramaModel(props) {
+function DioramaModel(props: DioramaModelProps) {
   const { scene } = useGLTF('/models/Prueba.glb')
-  const modelRef = useRef()
+  const modelRef = useRef<Group>(null)
   
   // Rotation animation
-  useFrame((state, delta) => {
-    if (!props.isRotating) return
+  useFrame((_, delta) => {
+    if (!props.isRotating || !modelRef.current) return
     modelRef.current.rotation.y += delta * 0.5
   })
   
@@ -23,8 +31,10 @@ function Navbar() {
   
   // Close menu when clicking outside
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (menuOpen && !e.target.closest('.navbar-menu') && !e.target.closest('.hamburger')) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuOpen && 
+          !(e.target as Element).closest('.navbar-menu') && 
+          !(e.target as Element).closest('.hamburger')) {
         setMenuOpen(false)
       }
     }
@@ -114,7 +124,6 @@ function App() {
                 rotation={[0, 0, 0]}
                 polar={[-Math.PI / 4, Math.PI / 4]}
                 azimuth={[-Math.PI / 4, Math.PI / 4]}
-                config={{ mass: 1, tension: 170, friction: 26 }} // Smoother for touch devices
               >
                 <Stage 
                   environment="night" 
