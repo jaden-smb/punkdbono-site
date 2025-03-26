@@ -1,188 +1,151 @@
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useState, Suspense, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { 
-  OrbitControls, 
-  useGLTF, 
-  Environment, 
-  Effects, 
-  PresentationControls,
-  ContactShadows,
-  MeshReflectorMaterial,
-  Stage,
-  useDetectGPU
-} from '@react-three/drei'
-
-import * as THREE from 'three'
+import { useGLTF, OrbitControls, PresentationControls, Stage, Environment } from '@react-three/drei'
 import './App.css'
 
-// NavBar component with mobile menu
-function NavBar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  return (
-    <nav className="navbar">
-      <div className="logo">PunkDBono</div>
-      
-      {/* Mobile menu toggle */}
-      <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-        <div className={`hamburger ${menuOpen ? 'active' : ''}`}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-      
-      <div className={`nav-links ${menuOpen ? 'active' : ''}`}>
-        <a href="#" onClick={() => setMenuOpen(false)}>Home</a>
-        <a href="#" onClick={() => setMenuOpen(false)}>About</a>
-        <a href="#" onClick={() => setMenuOpen(false)}>Gallery</a>
-        <a href="#" onClick={() => setMenuOpen(false)}>Contact</a>
-      </div>
-    </nav>
-  )
-}
-
-// Performance optimized model component
-function Model(props: any) {
-  const { scene } = useGLTF('/models/model.glb')
-  const ref = useRef<THREE.Group>(null)
+// Diorama model component with enhanced styling
+function DioramaModel(props) {
+  const { scene } = useGLTF('/models/Prueba.glb')
+  const modelRef = useRef()
   
-  // Add subtle rotation animation
-  useFrame((state) => {
-    if (ref.current) {
-      ref.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 0.15) * 0.1
-    }
+  // Rotation animation
+  useFrame((state, delta) => {
+    if (!props.isRotating) return
+    modelRef.current.rotation.y += delta * 0.5
   })
   
-  return (
-    <group ref={ref}>
-      <primitive object={scene} {...props} />
-      {/* Add wireframe effect to make untextured model look better */}
-      <mesh position={props.position} scale={props.scale * 1.01}>
-        <meshStandardMaterial 
-          wireframe 
-          color="#88ccff" 
-          emissive="#003366"
-          emissiveIntensity={0.5}
-          transparent
-          opacity={0.3}
-        />
-      </mesh>
-    </group>
-  )
+  return <primitive ref={modelRef} object={scene} scale={1.2} {...props} />
 }
 
-function App() {
-  // Detect mobile device
-  const [isMobile, setIsMobile] = useState(false);
+// Navbar Component with mobile menu
+function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false)
   
+  // Close menu when clicking outside
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    const handleClickOutside = (e) => {
+      if (menuOpen && !e.target.closest('.navbar-menu') && !e.target.closest('.hamburger')) {
+        setMenuOpen(false)
+      }
+    }
     
-    // Initial check
-    checkMobile();
-    
-    // Add resize listener
-    window.addEventListener('resize', checkMobile);
-    
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-    };
-  }, []);
-
+    document.addEventListener('click', handleClickOutside)
+    return () => document.removeEventListener('click', handleClickOutside)
+  }, [menuOpen])
+  
   return (
-    <>
-      <NavBar />
-      <div className="model-container">
-        <Canvas 
-          camera={{ 
-            position: [0, 1, isMobile ? 6 : 5], 
-            fov: isMobile ? 60 : 75 
-          }}
-          dpr={[1, Math.min(window.devicePixelRatio, 2)]} // Performance optimization
-          performance={{ min: 0.5 }}
-          gl={{ powerPreference: "high-performance" }}
-        >
-          {/* Better lighting setup */}
-          <color attach="background" args={['#050505']} />
-          <fog attach="fog" args={['#050505', 5, 25]} />
-          <ambientLight intensity={0.2} />
-          <spotLight 
-            position={[10, 10, 10]} 
-            angle={0.15} 
-            penumbra={1} 
-            intensity={1.5} 
-            castShadow
-          />
-          <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#8080ff" />
-          
-          {/* Enhanced model presentation */}
-          <PresentationControls
-            global
-            rotation={[0, -0.3, 0]}
-            polar={[-0.4, 0.2]}
-            azimuth={[-0.8, 0.8]}
-            speed={1.5}
-            zoom={0.7}
-            snap={true}
-          >
-            <Model position={[0, -1, 0]} scale={isMobile ? 25 : 30} />
-          </PresentationControls>
-          
-          {/* Simplified reflective floor for mobile */}
-          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.5, 0]}>
-            <planeGeometry args={[50, 50]} />
-            <MeshReflectorMaterial
-              blur={isMobile ? [100, 50] : [300, 100]}
-              resolution={isMobile ? 256 : 2048}
-              mixBlur={1}
-              mixStrength={50}
-              roughness={0.8}
-              depthScale={1.2}
-              minDepthThreshold={0.4}
-              maxDepthThreshold={1.4}
-              color="#050505"
-              metalness={0.8}
-            />
-          </mesh>
-          
-          {/* Environment light for better reflections */}
-          <Environment preset="city" />
-          <ContactShadows 
-            position={[0, -1.5, 0]} 
-            opacity={0.4} 
-            scale={20} 
-            blur={isMobile ? 1 : 2} 
-          />
-          
-          {/* Touch-enabled controls */}
-          <OrbitControls 
-            enablePan={false}
-            enableZoom={true}
-            enableRotate={true}
-            minPolarAngle={Math.PI / 4} 
-            maxPolarAngle={Math.PI / 1.5}
-            minDistance={3}
-            maxDistance={10}
-            // Touch properties
-            touches={{
-              ONE: THREE.TOUCH.ROTATE,
-              TWO: THREE.TOUCH.DOLLY_PAN
-            }}
-          />
-        </Canvas>
+    <nav className="navbar">
+      <div className="navbar-logo">
+        PunkD'Bono
       </div>
       
-      <div className="card">
-        <p>
-          {isMobile 
-            ? "Touch the model to rotate. Pinch to zoom." 
-            : "Interact with the 3D model above using your mouse!"}
-        </p>
+      {/* Hamburger icon for mobile */}
+      <div className={`hamburger ${menuOpen ? 'active' : ''}`} onClick={() => setMenuOpen(!menuOpen)}>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-    </>
+      
+      <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
+        <li><a href="#" onClick={() => setMenuOpen(false)}>Home</a></li>
+        <li><a href="#" onClick={() => setMenuOpen(false)}>Music</a></li>
+        <li><a href="#" onClick={() => setMenuOpen(false)}>Tour</a></li>
+        <li><a href="#" onClick={() => setMenuOpen(false)}>Merch</a></li>
+        <li><a href="#" onClick={() => setMenuOpen(false)}>About</a></li>
+      </ul>
+    </nav>
+  );
+}
+
+// Main App Component
+function App() {
+  const [isRotating, setIsRotating] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+  
+  return (
+    <div className="app-container">
+      {/* Navbar */}
+      <Navbar />
+      
+      {/* Main Content */}
+      <div className="content">
+        <div className="hero-section">
+          <h1 className="band-title">PunkD'Bono</h1>
+          <p className="band-subtitle">Rock your world with our latest album</p>
+        </div>
+        
+        {/* 3D Diorama */}
+        <div className="diorama-container">
+          <Canvas shadows camera={{ position: isMobile ? [2, 0, 2] : [2, 0, 2] }}>
+            <color attach="background" args={['#0D0D0D']} />
+            <fog attach="fog" args={['#0D0D0D', 10, 50]} />
+            
+            <Suspense fallback={null}>
+              <ambientLight intensity={0.4} />
+              <spotLight 
+                position={[10, 10, 10]} 
+                angle={0.15} 
+                penumbra={1} 
+                intensity={1} 
+                color="#05F2DB"
+                castShadow 
+              />
+              <spotLight 
+                position={[-10, -10, -10]} 
+                angle={0.2} 
+                penumbra={1} 
+                intensity={3} 
+                color="#F21B07"
+              />
+              
+              <PresentationControls
+                global
+                rotation={[0, 0, 0]}
+                polar={[-Math.PI / 4, Math.PI / 4]}
+                azimuth={[-Math.PI / 4, Math.PI / 4]}
+                config={{ mass: 1, tension: 170, friction: 26 }} // Smoother for touch devices
+              >
+                <Stage 
+                  environment="night" 
+                  intensity={0.5}
+                >
+                  <DioramaModel 
+                    isRotating={isRotating}
+                    onClick={() => setIsRotating(!isRotating)}
+                  />
+                </Stage>
+              </PresentationControls>
+              <Environment preset="night" />
+              <OrbitControls 
+                enablePan={false} 
+                maxPolarAngle={Math.PI / 2} 
+                minPolarAngle={Math.PI / 6}
+                enableDamping
+                dampingFactor={0.1}
+                rotateSpeed={isMobile ? 0.7 : 1} // Slower rotation on mobile for better control
+              />
+            </Suspense>
+          </Canvas>
+          
+          <div className="diorama-info">
+            <h2>Interactive 3D Experience</h2>
+            <p>{isMobile ? 'Tap' : 'Click'} on the model to start/stop rotation</p>
+            <p>{isMobile ? 'Swipe' : 'Drag'} to explore different angles</p>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
