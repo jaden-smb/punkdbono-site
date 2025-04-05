@@ -1,7 +1,8 @@
 import { useRef, useState, Suspense, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useGLTF, OrbitControls, PresentationControls, Stage, Environment } from '@react-three/drei'
+import { useGLTF, OrbitControls, PresentationControls, Stage, Environment, useAnimations } from '@react-three/drei'
 import { Group } from 'three'
+import * as THREE from 'three'
 import './App.css'
 
 // Define prop types for components
@@ -13,8 +14,20 @@ interface DioramaModelProps {
 
 // Diorama model component with enhanced styling
 function DioramaModel(props: DioramaModelProps) {
-  const { scene } = useGLTF('/models/Prueba.glb')
+  const { scene, animations } = useGLTF('/models/DioramaAnimacion.glb')
+  const { actions } = useAnimations(animations, scene)
   const modelRef = useRef<Group>(null)
+  
+  // Play animation on mount
+  useEffect(() => {
+    // Play all animations
+    Object.values(actions).forEach(action => {
+      if (action) {
+        action.reset().play()
+        action.setLoop(THREE.LoopRepeat, Infinity)
+      }
+    })
+  }, [actions])
   
   // Rotation animation
   useFrame((_, delta) => {
@@ -146,12 +159,6 @@ function App() {
               />
             </Suspense>
           </Canvas>
-          
-          <div className="diorama-info">
-            <h2>Interactive 3D Experience</h2>
-            <p>{isMobile ? 'Tap' : 'Click'} on the model to start/stop rotation</p>
-            <p>{isMobile ? 'Swipe' : 'Drag'} to explore different angles</p>
-          </div>
         </div>
       </div>
     </div>
