@@ -1,0 +1,74 @@
+/* 3D Diorama Styles */
+.diorama-container {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 4px solid var(--dark-brown);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.diorama-info {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background-color: rgba(13, 13, 13, 0.8);
+  color: var(--turquoise);
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid var(--bright-red);
+  max-width: 300px;
+  pointer-events: none;
+}
+
+.diorama-info h2 {
+  margin: 0 0 10px 0;
+  font-size: 1.5rem;
+}
+
+.diorama-info p {
+  margin: 5px 0;
+  color: var(--light-gray);
+}
+
+@media (max-width: 768px) {
+  .diorama-container {
+    height: 50vh;
+    border-width: 2px;
+  }
+  
+  .diorama-info {
+    bottom: 10px;
+    left: 10px;
+    padding: 10px;
+    max-width: 80%;
+  }
+  
+  .diorama-info h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .diorama-container {
+    height: 45vh;
+  }
+  
+  .diorama-info {
+    bottom: 5px;
+    left: 5px;
+    padding: 8px;
+    max-width: 90%;
+  }
+  
+  .diorama-info h2 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  
+  .diorama-info p {
+    font-size: 0.9rem;
+  }
+}
