@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
 /**
@@ -6,6 +7,7 @@ import './Navbar.css';
  */
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
   
   // Close menu when clicking outside
   useEffect(() => {
@@ -21,11 +23,16 @@ const Navbar = () => {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [menuOpen]);
   
+  // Close menu when route changes
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+  
   return (
     <nav className="navbar">
-      <div className="navbar-logo">
+      <Link to="/" className="navbar-logo">
         PunkD'Bono
-      </div>
+      </Link>
       
       {/* Hamburger icon for mobile */}
       <div 
@@ -38,11 +45,46 @@ const Navbar = () => {
       </div>
       
       <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
-        <li><a href="#" onClick={() => setMenuOpen(false)}>Home</a></li>
-        <li><a href="#" onClick={() => setMenuOpen(false)}>Galeria</a></li>
-        <li><a href="#" onClick={() => setMenuOpen(false)}>Blog</a></li>
-        <li><a href="#" onClick={() => setMenuOpen(false)}>Noticias</a></li>
-        <li><a href="#" onClick={() => setMenuOpen(false)}>About</a></li>
+        <li>
+          <Link 
+            to="/" 
+            className={location.pathname === '/' ? 'active' : ''}
+          >
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link 
+            to="/gallery" 
+            className={location.pathname === '/gallery' ? 'active' : ''}
+          >
+            Galeria
+          </Link>
+        </li>
+        <li>
+          <Link 
+            to="/blog" 
+            className={location.pathname === '/blog' ? 'active' : ''}
+          >
+            Blog
+          </Link>
+        </li>
+        <li>
+          <Link 
+            to="/news" 
+            className={location.pathname === '/news' ? 'active' : ''}
+          >
+            Noticias
+          </Link>
+        </li>
+        <li>
+          <Link 
+            to="/about" 
+            className={location.pathname === '/about' ? 'active' : ''}
+          >
+            About
+          </Link>
+        </li>
       </ul>
     </nav>
   );

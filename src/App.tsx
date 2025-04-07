@@ -1,41 +1,29 @@
-import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
-import DioramaScene from './components/Diorama/DioramaScene'
+import HomePage from './pages/Home/HomePage'
+import GalleryPage from './pages/Gallery/GalleryPage'
+import BlogPage from './pages/Blog/BlogPage'
+import NewsPage from './pages/News/NewsPage'
+import AboutPage from './pages/About/AboutPage'
 import './styles/global.css'
 
 /**
  * Main App Component
- * Manages the application state and renders the main layout and content
+ * Sets up routing for the application using React Router
  */
 function App() {
-  const [isRotating, setIsRotating] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-  
-  // Check if device is mobile
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768)
-    }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-  
   return (
-    <MainLayout>
-      <div className="hero-section">
-        <h1 className="band-title">PunkD'Bono</h1>
-        <p className="band-subtitle">Rock your world with our latest album</p>
-      </div>
-      
-      {/* 3D Diorama */}
-      <DioramaScene 
-        isRotating={isRotating} 
-        setIsRotating={setIsRotating} 
-        isMobile={isMobile}
-      />
-    </MainLayout>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="gallery" element={<GalleryPage />} />
+          <Route path="blog" element={<BlogPage />} />
+          <Route path="news" element={<NewsPage />} />
+          <Route path="about" element={<AboutPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

@@ -1,0 +1,56 @@
+.home-page {
+  padding-bottom: 2rem;
+}
+
+.band-description {
+  max-width: 1200px;
+  margin: 3rem auto;
+  background-color: rgba(13, 13, 13, 0.7);
+  padding: 2rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--bright-red);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.band-description h2 {
+  color: var(--turquoise);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--dark-brown);
+  padding-bottom: 0.5rem;
+}
+
+.band-description p {
+  color: var(--light-gray);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .band-description {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+  }
+  
+  .band-description h2 {
+    font-size: 1.7rem;
+  }
+  
+  .band-description p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .band-description {
+    margin: 1.5rem 1rem;
+    padding: 1rem;
+  }
+  
+  .band-description h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+}

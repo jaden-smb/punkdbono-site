@@ -1,0 +1,219 @@
+/* Loading Spinner Container */
+.loading-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--black);
+  z-index: 50;
+  transition: opacity 0.8s ease;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Punk logo animation */
+.logo-spinner {
+  margin-bottom: 20px;
+}
+
+.logo-spinner .letter {
+  display: inline-block;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--turquoise);
+  animation: pulsate 1.5s infinite alternate;
+}
+
+.logo-spinner .letter:nth-child(2n) {
+  color: var(--bright-red);
+  animation-delay: 0.2s;
+}
+
+.logo-spinner .letter:nth-child(3n) {
+  animation-delay: 0.3s;
+}
+
+.logo-spinner .letter:nth-child(5) {
+  color: var(--bright-red);
+  animation-delay: 0.5s;
+}
+
+/* Guitar loader animation */
+.guitar-loader {
+  position: relative;
+  width: 150px;
+  height: 100px;
+  margin: 30px 0;
+}
+
+.guitar-body {
+  position: absolute;
+  width: 100px;
+  height: 60px;
+  background-color: var(--dark-brown);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  top: 50%;
+  left: 25px;
+  transform: translateY(-50%);
+  box-shadow: 0 0 15px rgba(242, 27, 7, 0.7);
+  animation: guitarGlow 2s infinite alternate;
+}
+
+.guitar-neck {
+  position: absolute;
+  width: 80px;
+  height: 12px;
+  background-color: var(--dark-brown);
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  border-radius: 2px;
+}
+
+.guitar-strings {
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.string {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: var(--light-gray);
+  animation: strumming 0.5s infinite alternate;
+}
+
+.string:nth-child(1) {
+  top: 0;
+  animation-delay: 0s;
+}
+
+.string:nth-child(2) {
+  top: 20%;
+  animation-delay: 0.1s;
+}
+
+.string:nth-child(3) {
+  top: 40%;
+  animation-delay: 0.2s;
+}
+
+.string:nth-child(4) {
+  top: 60%;
+  animation-delay: 0.15s;
+}
+
+.string:nth-child(5) {
+  top: 80%;
+  animation-delay: 0.25s;
+}
+
+.string:nth-child(6) {
+  top: 100%;
+  animation-delay: 0.3s;
+}
+
+/* Loading text */
+.loading-text {
+  font-size: 1.5rem;
+  color: var(--bright-red);
+  margin: 10px 0 5px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.loading-subtext {
+  color: var(--turquoise);
+  font-size: 1rem;
+  opacity: 0.8;
+  animation: flickerText 2s infinite alternate;
+}
+
+/* Animations */
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    text-shadow: 0 0 5px rgba(5, 242, 219, 0.7);
+  }
+  100% {
+    transform: scale(1.1);
+    text-shadow: 0 0 20px rgba(5, 242, 219, 1), 0 0 30px rgba(5, 242, 219, 0.5);
+  }
+}
+
+@keyframes strumming {
+  0% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(2px);
+    opacity: 1;
+  }
+}
+
+@keyframes guitarGlow {
+  0% {
+    box-shadow: 0 0 15px rgba(242, 27, 7, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(242, 27, 7, 1), 0 0 50px rgba(242, 27, 7, 0.5);
+  }
+}
+
+@keyframes flickerText {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    opacity: 0.8;
+    text-shadow: 0 0 7px var(--turquoise);
+  }
+  20%, 24%, 55% {
+    opacity: 0.3;
+    text-shadow: none;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .logo-spinner .letter {
+    font-size: 2rem;
+  }
+  
+  .guitar-loader {
+    transform: scale(0.8);
+  }
+  
+  .loading-text {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-spinner .letter {
+    font-size: 1.5rem;
+  }
+  
+  .guitar-loader {
+    transform: scale(0.6);
+  }
+  
+  .loading-text {
+    font-size: 1.1rem;
+  }
+  
+  .loading-subtext {
+    font-size: 0.9rem;
+  }
+}

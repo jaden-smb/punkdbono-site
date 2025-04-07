@@ -38,7 +38,8 @@
   transition: all 0.3s ease;
 }
 
-.navbar-links li a:hover {
+.navbar-links li a:hover, 
+.navbar-links li a.active {
   color: var(--turquoise);
   background-color: rgba(5, 242, 219, 0.1);
 }

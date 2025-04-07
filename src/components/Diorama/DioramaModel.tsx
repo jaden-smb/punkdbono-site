@@ -8,6 +8,7 @@ import * as THREE from 'three';
 export interface DioramaModelProps {
   isRotating: boolean;
   onClick?: () => void;
+  onLoad?: () => void;
   [key: string]: any; // For other props that might be passed
 }
 
@@ -15,11 +16,12 @@ export interface DioramaModelProps {
  * 3D Diorama model component with animation and rotation controls
  */
 const DioramaModel = (props: DioramaModelProps) => {
-  const { scene, animations } = useGLTF('/models/DioramaAnimacion.glb');
+  // Using useGLTF with Suspense for lazy loading
+  const { scene, animations } = useGLTF('/models/DioramaAnimacion.glb', true);
   const { actions } = useAnimations(animations, scene);
   const modelRef = useRef<Group>(null);
   
-  // Play animation on mount
+  // Play animation on mount and notify parent that model is loaded
   useEffect(() => {
     // Play all animations
     Object.values(actions).forEach(action => {
@@ -28,7 +30,12 @@ const DioramaModel = (props: DioramaModelProps) => {
         action.setLoop(THREE.LoopRepeat, Infinity);
       }
     });
-  }, [actions]);
+    
+    // Notify parent component that model has loaded
+    if (props.onLoad) {
+      props.onLoad();
+    }
+  }, [actions, props]);
   
   // Rotation animation
   useFrame((_, delta) => {
@@ -38,5 +45,8 @@ const DioramaModel = (props: DioramaModelProps) => {
   
   return <primitive ref={modelRef} object={scene} scale={1.2} {...props} />;
 };
+
+// Use automatic asset preloading for better performance after initial load
+useGLTF.preload('/models/DioramaAnimacion.glb');
 
 export default DioramaModel;
