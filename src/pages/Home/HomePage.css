@@ -1,56 +1,515 @@
 .home-page {
-  padding-bottom: 2rem;
-}
-
-.band-description {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   max-width: 1200px;
-  margin: 3rem auto;
-  background-color: rgba(13, 13, 13, 0.7);
-  padding: 2rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Hero section with main title and band image */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0 2rem;
+  width: 100%;
+}
+
+.punk-title {
+  font-family: 'Rock Salt', cursive;
+  font-size: 4rem;
+  color: white;
+  text-align: center;
+  background-color: #05998a;
+  padding: 0.5rem 3rem;
+  display: inline-block;
+  transform: skew(-5deg);
+  position: relative;
+  border: 4px solid black;
+  box-shadow: 0 0 15px rgba(5, 242, 219, 0.7);
+  z-index: 1;
+  margin-bottom: 2rem;
+}
+
+.punk-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: 4px solid white;
+  transform: translate(10px, 10px);
+  z-index: -1;
+}
+
+.band-image {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  margin: 1rem auto;
+  display: block;
+  border: 5px solid var(--black);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
-  border-left: 4px solid var(--bright-red);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  object-fit: cover;
 }
 
-.band-description h2 {
-  color: var(--turquoise);
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid var(--dark-brown);
-  padding-bottom: 0.5rem;
+/* Content sections */
+.content-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
 }
 
-.band-description p {
-  color: var(--light-gray);
-  margin-bottom: 1rem;
-  line-height: 1.6;
+.section-container {
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+/* Diorama section */
+.diorama-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.section-title-home {
+  color: white;
+  background-color: black;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  font-family: 'Rock Salt', cursive;
+  margin: 0;
+  display: inline-block;
+  width: fit-content;
+  position: relative;
+  z-index: 2;
+}
+
+.diorama-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  width: 100%;
+}
+
+.diorama-text {
+  background-color: white;
+  color: black;
+  padding: 1.5rem;
+  transform: rotate(3deg);
+  font-family: 'Covered By Your Grace', cursive;
+  font-size: 1.4rem;
+  line-height: 1.4;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  height: fit-content;
+  transition: all 0.3s ease;
+}
+
+/* 360 degree section */
+.threesixty-section {
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.threesixty-banner {
+  background-color: #F21B07;
+  color: white;
+  padding: 0.75rem 2rem;
+  font-family: 'Rock Salt', cursive;
+  font-size: 1.8rem;
+  text-align: center;
+  transform: skew(-2deg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.threesixty-banner h3 {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Video section */
+.video-section {
+  margin-bottom: 3rem;
+  width: 100%;
+}
+
+.video-placeholder {
+  background-color: black;
+  width: 100%;
+  height: 400px;
+  margin-top: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Rock Salt', cursive;
+  font-size: 2.5rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.video-placeholder:hover {
+  box-shadow: 0 8px 30px rgba(242, 27, 7, 0.4);
+  transform: scale(1.01);
+}
+
+/* Mobile-specific enhancements */
+.mobile-home .section-container {
+  margin: 1.2rem 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.mobile-home .content-section {
+  gap: 1rem;
+}
+
+.mobile-home .band-image {
+  border-width: 3px;
+  margin: 0.5rem auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.mobile-home .section-title-home {
+  font-size: 1.3rem;
+  background-color: black;
+  padding: 0.4rem 0.8rem;
+}
+
+.mobile-home .diorama-text {
   font-size: 1.1rem;
+  padding: 1rem;
+  line-height: 1.3;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  transform: rotate(1deg);
 }
 
-/* Responsive adjustments */
+.mobile-home .threesixty-banner {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  transform: skew(-1deg);
+}
+
+.mobile-home .video-placeholder {
+  height: 200px;
+  margin-top: 0.8rem;
+}
+
+/* Prevent hover effects on touch devices */
+@media (hover: none) {
+  .video-placeholder:hover {
+    transform: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Large desktop screens */
+@media (min-width: 1200px) {
+  .home-page {
+    padding: 0 2rem;
+  }
+  
+  .diorama-wrapper {
+    gap: 2rem;
+  }
+}
+
+/* Desktop and large tablets */
+@media (max-width: 1024px) {
+  .punk-title {
+    font-size: 3.5rem;
+    padding: 0.5rem 2.5rem;
+  }
+  
+  .band-image {
+    max-width: 700px;
+  }
+  
+  .video-placeholder {
+    height: 380px;
+  }
+}
+
+/* Medium size tablets */
+@media (max-width: 992px) {
+  .diorama-wrapper {
+    grid-template-columns: 2fr 1fr;
+    gap: 1.2rem;
+  }
+  
+  .diorama-text {
+    transform: rotate(2deg);
+    font-size: 1.3rem;
+    padding: 1.3rem;
+  }
+  
+  .threesixty-banner {
+    font-size: 1.6rem;
+  }
+  
+  .video-placeholder {
+    height: 350px;
+    font-size: 2.2rem;
+  }
+}
+
+/* Small tablets */
 @media (max-width: 768px) {
-  .band-description {
-    margin: 2rem 1rem;
-    padding: 1.5rem;
+  .hero-section {
+    padding: 0.5rem 0 1.5rem;
+  }
+
+  .punk-title {
+    font-size: 3rem;
+    padding: 0.5rem 2rem;
   }
   
-  .band-description h2 {
-    font-size: 1.7rem;
+  .punk-title::before {
+    transform: translate(8px, 8px);
+    border-width: 3px;
+  }
+
+  .band-image {
+    max-width: 90%;
+    border-width: 3px;
   }
   
-  .band-description p {
-    font-size: 1rem;
+  .diorama-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .diorama-text {
+    transform: none;
+    font-size: 1.2rem;
+    padding: 1.2rem;
+    margin-top: -1rem;
+    z-index: 1;
+  }
+  
+  .threesixty-banner {
+    font-size: 1.5rem;
+    padding: 0.6rem 1.5rem;
+  }
+  
+  .video-placeholder {
+    height: 300px;
+    font-size: 2rem;
+  }
+  
+  .content-section {
+    gap: 1.2rem;
   }
 }
 
-@media (max-width: 480px) {
-  .band-description {
-    margin: 1.5rem 1rem;
-    padding: 1rem;
+/* Mobile landscape */
+@media (max-width: 576px) {
+  .home-page {
+    padding: 0 0.5rem;
   }
   
-  .band-description h2 {
-    font-size: 1.5rem;
+  .punk-title {
+    font-size: 2.4rem;
+    padding: 0.4rem 1.6rem;
+    margin-bottom: 1.2rem;
+    border-width: 3px;
+  }
+  
+  .punk-title::before {
+    transform: translate(6px, 6px);
+    border-width: 2px;
+  }
+  
+  .band-image {
+    margin: 0.6rem auto;
+    border-width: 3px;
+  }
+  
+  .section-title-home {
+    font-size: 1.4rem;
+  }
+  
+  .diorama-text {
+    font-size: 1.15rem;
+    padding: 1rem;
+    line-height: 1.3;
+    margin-top: -0.5rem;
+  }
+  
+  .threesixty-banner {
+    font-size: 1.3rem;
+    padding: 0.5rem 1.2rem;
+  }
+  
+  .video-placeholder {
+    height: 230px;
+    font-size: 1.6rem;
+  }
+  
+  .content-section {
+    gap: 1rem;
+  }
+  
+  .diorama-section, .threesixty-section, .video-section {
+    margin-bottom: 1.2rem;
+  }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 0.4rem 0 0.8rem;
+  }
+  
+  .punk-title {
+    font-size: 2.2rem;
+    padding: 0.4rem 1.3rem;
     margin-bottom: 1rem;
+  }
+  
+  .band-image {
+    border-width: 2px;
+    border-radius: 6px;
+  }
+  
+  .content-section {
+    gap: 0.8rem;
+  }
+  
+  .diorama-section {
+    margin-bottom: 1rem;
+  }
+  
+  .section-title-home {
+    font-size: 1.3rem;
+    padding: 0.3rem 0.8rem;
+  }
+  
+  .diorama-text {
+    font-size: 1rem;
+    padding: 0.8rem;
+    line-height: 1.3;
+    margin-top: 0;
+    border-radius: 4px;
+  }
+  
+  .threesixty-section {
+    margin: 1rem 0;
+  }
+  
+  .threesixty-banner {
+    font-size: 1.1rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .video-placeholder {
+    height: 180px;
+    font-size: 1.5rem;
+    border-radius: 6px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 360px) {
+  .punk-title {
+    font-size: 1.8rem;
+    padding: 0.3rem 1rem;
+    margin-bottom: 0.8rem;
+    border-width: 2px;
+  }
+  
+  .punk-title::before {
+    transform: translate(4px, 4px);
+    border-width: 1px;
+  }
+  
+  .section-title-home {
+    font-size: 1.1rem;
+    padding: 0.3rem 0.6rem;
+  }
+  
+  .diorama-text {
+    font-size: 0.9rem;
+    padding: 0.7rem;
+    line-height: 1.25;
+  }
+  
+  .threesixty-banner {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.7rem;
+  }
+  
+  .video-placeholder {
+    height: 160px;
+    font-size: 1.3rem;
+  }
+  
+  .content-section {
+    gap: 0.6rem;
+  }
+}
+
+/* Landscape orientation for mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-section {
+    padding: 0.3rem 0 0.6rem;
+  }
+  
+  .punk-title {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .band-image {
+    max-width: 60%;
+    max-height: 35vh;
+  }
+  
+  .diorama-wrapper {
+    grid-template-columns: 1fr;
+  }
+  
+  .video-placeholder {
+    height: 180px;
+  }
+  
+  .content-section {
+    gap: 0.8rem;
+  }
+}
+
+/* Add fade-in animations for smoother transitions */
+.band-image, .diorama-text, .threesixty-banner, .video-placeholder {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .band-image, .diorama-text, .threesixty-banner, .video-placeholder {
+    animation: none;
+  }
+  
+  .mobile-home .threesixty-banner {
+    transform: none;
   }
 }

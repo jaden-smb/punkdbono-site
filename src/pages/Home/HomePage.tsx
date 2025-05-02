@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import DioramaScene from '../../components/Diorama/DioramaScene';
 import Footer from '../../components/Footer/Footer';
+// Changed from direct import to URL reference
+import bandImage from '/images/INICIO-BANDA.jpg';
 import './HomePage.css';
 
 /**
- * Home page component with hero section, 3D diorama, and footer
+ * Home page component that matches the design in the image
  */
 const HomePage = () => {
   const [isRotating, setIsRotating] = useState(false);
@@ -22,32 +24,49 @@ const HomePage = () => {
   }, []);
   
   return (
-    <div className="home-page">
+    <div className={`home-page ${isMobile ? 'mobile-home' : ''}`}>
       <div className="hero-section">
-        <h1 className="band-title">PunkD'Bono</h1>
-        <p className="band-subtitle">Rock your world with our latest album</p>
+        <img 
+          src={bandImage} 
+          alt="PunkD'Bono Band" 
+          className="band-image" 
+          loading="eager"
+        />
       </div>
       
-      {/* 3D Diorama */}
-      <DioramaScene 
-        isRotating={isRotating} 
-        setIsRotating={setIsRotating} 
-        isMobile={isMobile}
-      />
-      
-      <section className="band-description">
-        <h2>Welcome to the Official Website</h2>
-        <p>
-          PunkD'Bono is a revolutionary punk rock band that blends classic punk energy with modern 
-          sound engineering. Founded in 2020, our band has quickly risen through the ranks of the 
-          underground music scene with our authentic sound and energetic performances.
-        </p>
-        <p>
-          Our music speaks truth to power while delivering catchy hooks and raw emotional power. 
-          Whether you're a longtime punk enthusiast or new to the genre, our unique sound will 
-          captivate your imagination and get your heart racing.
-        </p>
-      </section>
+      <div className="content-section">
+        <div className="diorama-section section-container">
+          <h2 className="section-title-home">DIORAMA</h2>
+          
+          {/* 3D Diorama */}
+          <div className="diorama-wrapper">
+            <DioramaScene 
+              isRotating={isRotating} 
+              setIsRotating={setIsRotating} 
+              isMobile={isMobile}
+            />
+            
+            <div className="diorama-text">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                {!isMobile && " Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan"}
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="threesixty-section section-container">
+          <div className="threesixty-banner">
+            <h3>Diezmo en 360°?</h3>
+          </div>
+        </div>
+        
+        <div className="video-section section-container">
+          <h2 className="section-title-home">VIDEO</h2>
+          <div className="video-placeholder">VIDEO</div>
+        </div>
+      </div>
       
       <Footer />
     </div>

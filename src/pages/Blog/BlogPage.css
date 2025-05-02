@@ -7,6 +7,7 @@
 .page-header {
   text-align: center;
   margin-bottom: 3rem;
+  position: relative;
 }
 
 .page-header h1 {
@@ -15,6 +16,7 @@
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 2px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
 .page-header p {
@@ -36,6 +38,7 @@
   border-left: 4px solid var(--turquoise);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
 
 .blog-post:hover {
@@ -46,12 +49,19 @@
 .post-header {
   padding: 1.5rem;
   border-bottom: 1px solid rgba(242, 242, 242, 0.1);
+  position: relative;
 }
 
 .post-header h2 {
   color: var(--turquoise);
   font-size: 1.8rem;
   margin-bottom: 0.8rem;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.blog-post:hover .post-header h2 {
+  color: var(--bright-red);
 }
 
 .post-meta {
@@ -59,6 +69,23 @@
   gap: 1.5rem;
   color: var(--light-gray);
   opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.post-date, .post-author {
+  display: flex;
+  align-items: center;
+}
+
+.post-date::before {
+  content: "📅";
+  margin-right: 5px;
+  font-size: 0.9rem;
+}
+
+.post-author::before {
+  content: "✍️";
+  margin-right: 5px;
   font-size: 0.9rem;
 }
 
@@ -79,17 +106,60 @@
   text-decoration: none;
   font-weight: bold;
   transition: all 0.3s ease;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.read-more::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--turquoise);
+  transition: width 0.3s ease;
 }
 
 .read-more:hover {
   color: var(--turquoise);
-  text-decoration: underline;
 }
 
-/* Responsive adjustments */
+.read-more:hover::after {
+  width: 100%;
+}
+
+/* Large tablet responsive adjustments */
+@media (max-width: 992px) {
+  .blog-page {
+    padding: 1.8rem;
+  }
+  
+  .page-header {
+    margin-bottom: 2.5rem;
+  }
+  
+  .page-header h1 {
+    font-size: 2.8rem;
+  }
+  
+  .blog-container {
+    gap: 2.5rem;
+  }
+  
+  .post-header h2 {
+    font-size: 1.7rem;
+  }
+}
+
+/* Tablet responsive adjustments */
 @media (max-width: 768px) {
   .blog-page {
     padding: 1.5rem;
+  }
+  
+  .page-header {
+    margin-bottom: 2rem;
   }
   
   .page-header h1 {
@@ -104,18 +174,77 @@
     gap: 2rem;
   }
   
+  .blog-post {
+    border-left-width: 3px;
+  }
+  
+  .post-header {
+    padding: 1.3rem;
+  }
+  
   .post-header h2 {
     font-size: 1.6rem;
   }
+  
+  .post-content {
+    padding: 1.3rem;
+  }
+  
+  .post-content p {
+    font-size: 0.95rem;
+  }
 }
 
+/* Mobile landscape responsive adjustments */
+@media (max-width: 576px) {
+  .blog-page {
+    padding: 1.2rem;
+  }
+  
+  .page-header {
+    margin-bottom: 1.8rem;
+  }
+  
+  .page-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .blog-container {
+    gap: 1.8rem;
+  }
+  
+  .post-header {
+    padding: 1.2rem;
+  }
+  
+  .post-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .post-meta {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .post-content {
+    padding: 1.2rem;
+  }
+  
+  .post-content p {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+}
+
+/* Mobile portrait responsive adjustments */
 @media (max-width: 480px) {
   .blog-page {
     padding: 1rem;
   }
   
   .page-header {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
   
   .page-header h1 {
@@ -126,6 +255,18 @@
     font-size: 1rem;
   }
   
+  .blog-container {
+    gap: 1.5rem;
+  }
+  
+  .blog-post {
+    border-left-width: 3px;
+  }
+  
+  .post-header {
+    padding: 1rem;
+  }
+  
   .post-header h2 {
     font-size: 1.4rem;
   }
@@ -133,5 +274,20 @@
   .post-meta {
     flex-direction: column;
     gap: 0.3rem;
+  }
+  
+  .post-content {
+    padding: 1rem;
+  }
+}
+
+/* Small mobile responsive adjustments */
+@media (max-width: 360px) {
+  .post-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .post-content p {
+    font-size: 0.85rem;
   }
 }

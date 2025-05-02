@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
+// Changed from direct import to URL reference
+import logoImage from '/images/LOGO-PUNKDBONO.png';
 
 /**
  * Navbar component with responsive mobile menu
@@ -31,7 +33,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-logo">
-        PunkD'Bono
+        <img src={logoImage} alt="PunkD'Bono Logo" className="logo-image" />
       </Link>
       
       {/* Hamburger icon for mobile */}
@@ -59,14 +61,6 @@ const Navbar = () => {
             className={location.pathname === '/gallery' ? 'active' : ''}
           >
             Galeria
-          </Link>
-        </li>
-        <li>
-          <Link 
-            to="/blog" 
-            className={location.pathname === '/blog' ? 'active' : ''}
-          >
-            Blog
           </Link>
         </li>
         <li>

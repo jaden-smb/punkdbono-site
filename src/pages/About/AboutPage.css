@@ -7,6 +7,7 @@
 .page-header {
   text-align: center;
   margin-bottom: 3rem;
+  position: relative;
 }
 
 .page-header h1 {
@@ -15,6 +16,7 @@
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 2px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
 .page-header p {
@@ -31,7 +33,7 @@
 .about-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: center;
 }
 
@@ -40,6 +42,13 @@
   overflow: hidden;
   border: 3px solid var(--dark-brown);
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.about-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(5, 242, 219, 0.3);
 }
 
 .about-image img {
@@ -47,6 +56,11 @@
   height: 100%;
   object-fit: cover;
   vertical-align: middle;
+  transition: transform 0.5s ease;
+}
+
+.about-image:hover img {
+  transform: scale(1.05);
 }
 
 .story-content h2,
@@ -57,6 +71,19 @@
   margin-bottom: 1.5rem;
   border-bottom: 2px solid var(--dark-brown);
   padding-bottom: 0.5rem;
+  position: relative;
+}
+
+.story-content h2::after,
+.band-members h2::after,
+.philosophy-content h2::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100px;
+  height: 2px;
+  background-color: var(--bright-red);
 }
 
 .story-content p,
@@ -75,6 +102,7 @@
 
 .band-members h2 {
   margin-bottom: 2rem;
+  text-align: left;
 }
 
 .members-grid {
@@ -100,6 +128,18 @@
 .member-image {
   height: 280px;
   overflow: hidden;
+  position: relative;
+}
+
+.member-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 70%, rgba(13, 13, 13, 0.4));
+  pointer-events: none;
 }
 
 .member-image img {
@@ -148,22 +188,64 @@
   padding: 2rem;
   border-left: 4px solid var(--turquoise);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
-/* Responsive adjustments */
+.philosophy-container:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Tablet Landscape Responsive adjustments */
+@media (max-width: 1024px) {
+  .about-page {
+    padding: 1.8rem;
+  }
+  
+  .story-content h2,
+  .band-members h2,
+  .philosophy-content h2 {
+    font-size: 2rem;
+  }
+  
+  .members-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+  
+  .member-image {
+    height: 260px;
+  }
+}
+
+/* Tablet Responsive adjustments */
 @media (max-width: 992px) {
   .about-container {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
   
   .about-image {
-    margin-bottom: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .members-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .member-image {
+    height: 240px;
   }
 }
 
+/* Mobile Landscape Responsive adjustments */
 @media (max-width: 768px) {
   .about-page {
     padding: 1.5rem;
+  }
+  
+  .page-header {
+    margin-bottom: 2rem;
   }
   
   .page-header h1 {
@@ -174,6 +256,7 @@
   .band-members h2,
   .philosophy-content h2 {
     font-size: 1.8rem;
+    margin-bottom: 1.2rem;
   }
   
   .story-content p,
@@ -181,12 +264,58 @@
     font-size: 1rem;
   }
   
+  .band-story {
+    margin-bottom: 3rem;
+  }
+  
+  .band-members {
+    margin-bottom: 3rem;
+  }
+  
   .members-grid {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1.5rem;
+    gap: 1.2rem;
+  }
+  
+  .member-info h3 {
+    font-size: 1.3rem;
+  }
+  
+  .philosophy-container {
+    padding: 1.8rem;
   }
 }
 
+/* Mobile Portrait Responsive adjustments */
+@media (max-width: 576px) {
+  .members-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .member-image {
+    height: 180px;
+  }
+  
+  .member-info {
+    padding: 1.2rem;
+  }
+  
+  .member-info h3 {
+    font-size: 1.2rem;
+  }
+  
+  .member-info h4 {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .member-info p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+}
+
+/* Small Mobile Responsive adjustments */
 @media (max-width: 480px) {
   .about-page {
     padding: 1rem;
@@ -207,19 +336,43 @@
     margin-bottom: 1rem;
   }
   
+  .story-content h2::after,
+  .band-members h2::after,
+  .philosophy-content h2::after {
+    width: 80px;
+  }
+  
+  .about-image {
+    border-width: 2px;
+  }
+  
   .members-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .member-card {
+    max-width: 320px;
+    margin: 0 auto;
   }
   
   .member-image {
-    height: 240px;
-  }
-  
-  .member-info h3 {
-    font-size: 1.3rem;
+    height: 220px;
   }
   
   .philosophy-container {
     padding: 1.5rem;
+    border-width: 3px;
+  }
+}
+
+/* Very Small Mobile Responsive adjustments */
+@media (max-width: 360px) {
+  .member-image {
+    height: 180px;
+  }
+  
+  .philosophy-container {
+    padding: 1.2rem;
   }
 }

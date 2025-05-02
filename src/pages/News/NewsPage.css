@@ -36,6 +36,12 @@
   overflow: hidden;
   border-left: 4px solid var(--turquoise);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.news-article.featured:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(5, 242, 219, 0.3);
 }
 
 .article-image {
@@ -63,6 +69,7 @@
   font-size: 0.8rem;
   letter-spacing: 1px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1;
 }
 
 .article-content {
@@ -73,6 +80,7 @@
   font-size: 2rem;
   color: var(--turquoise);
   margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
 .article-meta {
@@ -91,6 +99,7 @@
   border-left: 3px solid var(--bright-red);
   padding-left: 1rem;
   margin-bottom: 1.5rem;
+  line-height: 1.6;
 }
 
 .article-content p {
@@ -124,12 +133,19 @@
 
 .card-image {
   height: 200px;
+  position: relative;
+  overflow: hidden;
 }
 
 .card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.news-card:hover .card-image img {
+  transform: scale(1.1);
 }
 
 .card-content {
@@ -143,6 +159,7 @@
   font-size: 1.4rem;
   color: var(--turquoise);
   margin-bottom: 0.8rem;
+  line-height: 1.3;
 }
 
 .card-meta {
@@ -168,17 +185,77 @@
   font-weight: bold;
   transition: all 0.3s ease;
   margin-top: auto;
+  position: relative;
+  padding: 0.3rem 0;
+}
+
+.read-more::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--turquoise);
+  transition: width 0.3s ease;
 }
 
 .read-more:hover {
   color: var(--turquoise);
-  text-decoration: underline;
 }
 
-/* Responsive adjustments */
+.read-more:hover::after {
+  width: 100%;
+}
+
+/* Larger Tablet Responsive adjustments */
+@media (max-width: 992px) {
+  .news-page {
+    padding: 1.8rem;
+  }
+  
+  .page-header h1 {
+    font-size: 2.8rem;
+  }
+  
+  .article-image {
+    height: 350px;
+  }
+  
+  .article-content h2 {
+    font-size: 1.8rem;
+  }
+  
+  .article-excerpt {
+    font-size: 1.15rem;
+  }
+  
+  .news-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.8rem;
+  }
+}
+
+/* Tablet Responsive adjustments */
 @media (max-width: 768px) {
   .news-page {
     padding: 1.5rem;
+  }
+  
+  .page-header {
+    margin-bottom: 2rem;
+  }
+  
+  .page-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .page-header p {
+    font-size: 1.1rem;
+  }
+  
+  .news-container {
+    gap: 2rem;
   }
   
   .article-image {
@@ -195,17 +272,72 @@
   
   .article-excerpt {
     font-size: 1.1rem;
+    padding-left: 0.8rem;
+    margin-bottom: 1.2rem;
   }
   
   .news-grid {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1.5rem;
   }
+  
+  .card-content h3 {
+    font-size: 1.3rem;
+  }
 }
 
+/* Mobile Responsive adjustments */
+@media (max-width: 580px) {
+  .news-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+  
+  .card-image {
+    height: 160px;
+  }
+  
+  .card-content {
+    padding: 1.2rem;
+  }
+  
+  .card-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .card-meta {
+    margin-bottom: 0.8rem;
+    font-size: 0.75rem;
+  }
+  
+  .card-content p {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+}
+
+/* Small Mobile Responsive adjustments */
 @media (max-width: 480px) {
   .news-page {
     padding: 1rem;
+  }
+  
+  .page-header h1 {
+    font-size: 2rem;
+  }
+  
+  .page-header p {
+    font-size: 1rem;
+  }
+  
+  .news-container {
+    gap: 1.5rem;
+  }
+  
+  .news-article.featured {
+    border-width: 3px;
   }
   
   .article-image {
@@ -234,9 +366,35 @@
   
   .article-excerpt {
     font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
   }
   
   .news-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .card-image {
+    height: 180px;
+  }
+  
+  .card-content {
+    padding: 1rem;
+  }
+}
+
+/* Very Small Mobile Responsive adjustments */
+@media (max-width: 360px) {
+  .article-image {
+    height: 180px;
+  }
+  
+  .article-content h2 {
+    font-size: 1.3rem;
+  }
+  
+  .card-image {
+    height: 160px;
   }
 }

@@ -1,20 +1,34 @@
 /* Main Layout Styles */
 .app-container {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  background-image: url('/images/wall.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-color: var(--black);
+  overflow-x: hidden; /* Prevent horizontal scrolling on small screens */
 }
 
 .content {
   flex: 1;
-  padding: 0 2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-bottom: 80px; /* Increased padding to account for the audio player height */
 }
 
 /* Hero Section */
 .hero-section {
-  padding: 2rem;
+  padding: 2rem 1rem;
   text-align: center;
   margin-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .band-title {
@@ -23,6 +37,7 @@
   margin-bottom: 0.5rem;
   letter-spacing: 2px;
   text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .band-subtitle {
@@ -30,23 +45,107 @@
   color: var(--light-gray);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .content {
-    padding: 0 1rem 1rem 1rem;
+/* Medium screens */
+@media (max-width: 992px) {
+  .band-title {
+    font-size: 3.5rem;
+  }
+  
+  .band-subtitle {
+    font-size: 1.4rem;
   }
 
-  .band-title {
-    font-size: 3rem;
+  .content {
+    padding-bottom: 90px;
   }
 }
 
-@media (max-width: 480px) {
+/* Tablets */
+@media (max-width: 768px) {
+  .content {
+    padding: 0;
+    padding-bottom: 110px; /* Increased padding for tablet player layout */
+  }
+
+  .hero-section {
+    padding: 1.5rem 1rem;
+  }
+  
   .band-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
+  }
+  
+  .band-subtitle {
+    font-size: 1.3rem;
+  }
+  
+  /* Optimize background attachment for mobile */
+  .app-container {
+    background-attachment: scroll;
+  }
+}
+
+/* Mobile landscape */
+@media (max-width: 576px) {
+  .content {
+    padding-bottom: 140px; /* Further increased padding for mobile player layout */
+  }
+
+  .hero-section {
+    padding: 1.2rem 0.8rem;
+  }
+  
+  .band-title {
+    font-size: 2.7rem;
   }
   
   .band-subtitle {
     font-size: 1.2rem;
+  }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 1rem 0.8rem;
+  }
+  
+  .band-title {
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+  }
+  
+  .band-subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 360px) {
+  .hero-section {
+    padding: 0.8rem 0.6rem;
+  }
+  
+  .band-title {
+    font-size: 2.2rem;
+  }
+  
+  .band-subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* Landscape orientation for mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+  .content {
+    padding-bottom: 60px; /* Adjusted for landscape orientation */
+  }
+
+  .hero-section {
+    padding: 0.8rem 1rem;
+  }
+  
+  .band-title {
+    font-size: 2.5rem;
   }
 }

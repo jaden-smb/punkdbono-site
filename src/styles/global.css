@@ -6,6 +6,12 @@
   --light-gray: #F2F2F2;
   --black: #0D0D0D;
   
+  /* Breakpoints as CSS variables for consistency */
+  --breakpoint-small: 480px;
+  --breakpoint-medium: 768px;
+  --breakpoint-large: 992px;
+  --breakpoint-xlarge: 1200px;
+  
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -59,6 +65,33 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Touch optimization for mobile devices */
+@media (max-width: 768px) {
+  button, 
+  input, 
+  select, 
+  a {
+    min-height: 44px; /* Minimum touch target size */
+    min-width: 44px;
+  }
+  
+  /* Improve tap target spacing */
+  a, button {
+    padding: 0.8em 1.2em;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px; /* Base font size reduction */
+  }
+  
+  button, a {
+    padding: 0.7em 1em;
+  }
 }
 
 @media (prefers-color-scheme: light) {
