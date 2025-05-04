@@ -19,7 +19,7 @@
   max-width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
-  padding-bottom: 80px; /* Increased padding to account for the audio player height */
+  padding-bottom: 80px; /* Base padding to account for the audio player height */
 }
 
 /* Media queries - simplified and consolidated */
@@ -32,7 +32,7 @@
 @media (max-width: 768px) {
   .content {
     padding: 0;
-    padding-bottom: 110px;
+    padding-bottom: 190px; /* Increased to accommodate footer + 135px audio player */
   }
   
   /* Optimize background attachment for mobile */
@@ -43,13 +43,13 @@
 
 @media (max-width: 576px) {
   .content {
-    padding-bottom: 140px;
+    padding-bottom: 240px; /* Increased to accommodate footer + 170px audio player */
   }
 }
 
 /* Landscape orientation for mobile devices */
 @media (max-height: 500px) and (orientation: landscape) {
   .content {
-    padding-bottom: 60px;
+    padding-bottom: 120px; /* Increased for footer + player */
   }
 }

@@ -1,8 +1,10 @@
 /* Gallery page styles */
 .gallery-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem 2rem;
 }
 
 /* Section Title Styles */
@@ -29,8 +31,9 @@
 /* Section Containers */
 .section-container {
   position: relative;
-  margin: 3rem 0;
+  margin: 3rem auto;
   padding: 0;
+  width: 100%;
 }
 
 /* Section Titles */
@@ -76,12 +79,16 @@
   box-shadow: var(--shadow-lg);
   z-index: 1;
   min-height: 150px; /* Prevent content shift during loading */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Carousel Container specific */
 .carousel-container {
-  height: 60vh;
-  max-height: 500px;
+  height: 70vh;
+  max-height: 600px;
+  width: 100%;
   background: linear-gradient(135deg, var(--black) 60%, var(--turquoise) 100%);
   border: 4px solid var(--bright-red);
   box-shadow: 0 0 40px 0 var(--turquoise), 0 0 0 8px var(--black) inset;
@@ -90,8 +97,9 @@
 
 /* Photo gallery specific */
 .photo-gallery {
-  height: 450px;
+  height: 550px;
   margin-top: 5rem;
+  width: 100%;
   background: linear-gradient(135deg, var(--black) 60%, var(--bright-red) 100%);
   border: 4px solid var(--turquoise);
   box-shadow: 0 0 40px 0 var(--bright-red), 0 0 0 8px var(--black) inset;
@@ -157,20 +165,27 @@
   border-radius: 12px;
   overflow: hidden;
   background: var(--black);
+  padding: 10px;
 }
 
 .carousel-item.active {
   box-shadow: 0 0 32px 0 var(--turquoise);
   z-index: 2;
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%) !important;
 }
 
 .carousel-item video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 12px;
   border: 2px solid var(--turquoise);
   background: var(--black);
+  max-height: 560px;
 }
 
 .carousel-item img {
@@ -274,6 +289,9 @@
   overflow: hidden;
   background: var(--black);
   border: 2px solid var(--bright-red);
+  width: 80%; /* Control width of the photo */
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .photo-item img {
@@ -494,6 +512,7 @@
 @media (max-width: 768px) {
   .gallery-page {
     padding: 0 1.5rem 2rem;
+    margin: revert;
   }
   
   .section-title h2 {
@@ -526,6 +545,7 @@
   .gallery-page {
     padding: 0 0.8rem;
     max-width: 100%;
+    margin: revert;
   }
   
   .section-title h2 {

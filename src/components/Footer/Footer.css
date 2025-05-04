@@ -11,6 +11,7 @@
   transform: translateX(-50%);
   position: relative;
   margin-top: 2rem;
+  z-index: 1; /* Ensure it's above normal content but below AudioPlayer */
 }
 
 /* Contact information */
@@ -170,17 +171,12 @@
 /* Responsive styles */
 @media (min-width: 1200px) {
   .site-footer {
-    padding: 3rem 0 5rem;
     clip-path: polygon(0 8%, 5% 0, 10% 8%, 15% 0, 20% 8%, 25% 0, 30% 8%, 35% 0, 40% 8%, 45% 0, 50% 8%, 55% 0, 60% 8%, 65% 0, 70% 8%, 75% 0, 80% 8%, 85% 0, 90% 8%, 95% 0, 100% 8%, 100% 100%, 0 100%);
   }
 }
 
 /* Medium tablets */
 @media (max-width: 992px) {
-  .site-footer {
-    padding-top: 2.5rem;
-    padding-bottom: 5rem;
-  }
   
   .contact-info {
     font-size: 1.3rem;
@@ -230,11 +226,12 @@
 @media (max-width: 576px) {
   .site-footer {
     padding-top: 1.8rem;
-    padding-bottom: 7rem;
     margin-top: 1.8rem;
+    margin-bottom: 120px; /* Match AudioPlayer height for mobile */
   }
   
   .contact-info {
+    padding-top: 20px;
     font-size: 1.15rem;
   }
   
@@ -260,7 +257,6 @@
 @media (max-width: 480px) {
   .site-footer {
     padding-top: 1.5rem;
-    padding-bottom: 7.5rem;
   }
   
   .footer-content {
@@ -289,7 +285,6 @@
 @media (max-width: 360px) {
   .site-footer {
     padding-top: 1.2rem;
-    padding-bottom: 8rem;
     margin-top: 1.5rem;
   }
   
@@ -306,7 +301,6 @@
 @media (max-height: 500px) and (orientation: landscape) {
   .site-footer {
     padding-top: 1.5rem;
-    padding-bottom: 4.5rem;
   }
   
   .contact-info {

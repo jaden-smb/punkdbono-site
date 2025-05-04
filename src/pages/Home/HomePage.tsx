@@ -67,8 +67,7 @@ const HomePage = () => {
           <div className="video-placeholder">VIDEO</div>
         </div>
       </div>
-      
-      <Footer />
+
     </div>
   );
 };

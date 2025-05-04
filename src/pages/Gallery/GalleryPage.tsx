@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Footer from '../../components/Footer/Footer';
 import './GalleryPage.css';
 
 /**
@@ -127,7 +126,6 @@ const GalleryPage = () => {
           <button className="gallery-button next" onClick={nextPhotoSlide}>❯</button>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

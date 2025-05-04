@@ -132,8 +132,6 @@ const NewsPage = () => {
           </article>
         </div>
       </div>
-      
-      <Footer />
     </div>
   );
 };
