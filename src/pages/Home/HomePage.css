@@ -50,10 +50,8 @@
 
 /* Band image */
 .band-image {
-  width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   height: auto;
-  margin: 1rem auto;
   display: block;
   border: 5px solid var(--black);
   box-shadow: var(--shadow-lg);
@@ -291,7 +289,7 @@
   }
   
   .band-image {
-    max-width: 95%;
+    max-width: 430px;
     border-width: 2px;
     border-radius: 6px;
   }

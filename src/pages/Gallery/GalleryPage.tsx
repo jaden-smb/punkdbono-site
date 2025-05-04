@@ -6,24 +6,42 @@ import './GalleryPage.css';
  * Gallery page with live performance carousel and photo grid
  */
 const GalleryPage = () => {
-  // Using placeholder images that resemble the punk band aesthetic seen in the design
-  const liveImages = [
-    { id: 1, src: 'https://images.unsplash.com/photo-1501612780327-45045538702b?q=80&w=1200&h=600&auto=format&fit=crop', alt: 'Live Performance', caption: 'Live at Underground Festival' },
-    { id: 2, src: 'https://images.unsplash.com/photo-1563841930606-67e2bce48b78?q=80&w=1200&h=600&auto=format&fit=crop', alt: 'Band Performance', caption: 'Rocking Out' },
-    { id: 3, src: 'https://images.unsplash.com/photo-1520176501380-9a174bf7c783?q=80&w=1200&h=600&auto=format&fit=crop', alt: 'Concert', caption: 'Latest Show' },
+  // Use actual band videos and photos from public folder
+  const liveVideos = [
+    { id: 1, src: '/images/videos-live/VID-20241124-WA0001.mp4', alt: 'Live Video 1', caption: 'Live Show 1' },
+    { id: 2, src: '/images/videos-live/VID-20241124-WA0002.mp4', alt: 'Live Video 2', caption: 'Live Show 2' },
+    { id: 3, src: '/images/videos-live/VID-20241124-WA0003.mp4', alt: 'Live Video 3', caption: 'Live Show 3' },
+    { id: 4, src: '/images/videos-live/VID-20241124-WA0004.mp4', alt: 'Live Video 4', caption: 'Live Show 4' },
+    { id: 5, src: '/images/videos-live/VID-20241124-WA0005.mp4', alt: 'Live Video 5', caption: 'Live Show 5' },
+    { id: 6, src: '/images/videos-live/VID-20241124-WA0006.mp4', alt: 'Live Video 6', caption: 'Live Show 6' },
+    { id: 7, src: '/images/videos-live/VID-20241124-WA0009.mp4', alt: 'Live Video 7', caption: 'Live Show 7' },
+    { id: 8, src: '/images/videos-live/VID-20241124-WA0024.mp4', alt: 'Live Video 8', caption: 'Live Show 8' },
+    { id: 9, src: '/images/videos-live/VID-20241124-WA0025.mp4', alt: 'Live Video 9', caption: 'Live Show 9' },
   ];
-  
-  const photoImages = [
-    { id: 1, src: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=600&h=400&auto=format&fit=crop', alt: 'Guitarist', category: 'band' },
-    { id: 2, src: 'https://images.unsplash.com/photo-1468234560893-89c00b6385ff?q=80&w=600&h=400&auto=format&fit=crop', alt: 'Vocalist', category: 'band' },
-    { id: 3, src: 'https://images.unsplash.com/photo-1471478331149-c72f17e33c73?q=80&w=600&h=400&auto=format&fit=crop', alt: 'Bassist', category: 'band' },
-    { id: 4, src: 'https://images.unsplash.com/photo-1502773860571-211a597d6e4b?q=80&w=600&h=400&auto=format&fit=crop', alt: 'Drummer', category: 'band' },
-    { id: 5, src: 'https://images.unsplash.com/photo-1549213783-8284d0336c4f?q=80&w=600&h=400&auto=format&fit=crop', alt: 'Crowd', category: 'fans' },
-    { id: 6, src: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?q=80&w=600&h=400&auto=format&fit=crop', alt: 'Stage', category: 'venue' },
+
+  const bandPhotos = [
+    { id: 1, src: '/images/band/IMG-20241125-WA0115.jpg', alt: 'Band Photo 1' },
+    { id: 2, src: '/images/band/IMG-20241125-WA0117.jpg', alt: 'Band Photo 2' },
+    { id: 3, src: '/images/band/IMG-20241125-WA0119.jpg', alt: 'Band Photo 3' },
+    { id: 4, src: '/images/band/IMG-20241125-WA0121.jpg', alt: 'Band Photo 4' },
+    { id: 5, src: '/images/band/IMG-20241125-WA0123.jpg', alt: 'Band Photo 5' },
+    { id: 6, src: '/images/band/IMG-20241125-WA0125.jpg', alt: 'Band Photo 6' },
+    { id: 7, src: '/images/band/IMG-20241125-WA0127.jpg', alt: 'Band Photo 7' },
+    { id: 8, src: '/images/band/IMG-20241125-WA0129.jpg', alt: 'Band Photo 8' },
+    { id: 9, src: '/images/band/IMG-20241125-WA0131.jpg', alt: 'Band Photo 9' },
+    { id: 10, src: '/images/band/IMG-20241125-WA0133.jpg', alt: 'Band Photo 10' },
+    { id: 11, src: '/images/band/IMG-20241125-WA0135.jpg', alt: 'Band Photo 11' },
+    { id: 12, src: '/images/band/IMG-20241125-WA0137.jpg', alt: 'Band Photo 12' },
+    { id: 13, src: '/images/band/IMG-20241125-WA0139.jpg', alt: 'Band Photo 13' },
+    { id: 14, src: '/images/band/IMG-20241125-WA0141.jpg', alt: 'Band Photo 14' },
+    { id: 15, src: '/images/band/IMG-20241125-WA0143.jpg', alt: 'Band Photo 15' },
+    { id: 16, src: '/images/band/IMG-20241125-WA0145.jpg', alt: 'Band Photo 16' },
+    { id: 17, src: '/images/band/IMG-20241125-WA0147.jpg', alt: 'Band Photo 17' },
+    { id: 18, src: '/images/band/IMG-20241125-WA0149.jpg', alt: 'Band Photo 18' },
   ];
   
   const [currentLiveSlide, setCurrentLiveSlide] = useState(0);
-  const [currentPhotoSet, setCurrentPhotoSet] = useState(0);
+  const [currentPhotoSlide, setCurrentPhotoSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   
   // Check if mobile view is active
@@ -41,68 +59,72 @@ const GalleryPage = () => {
   }, []);
   
   const nextLiveSlide = () => {
-    setCurrentLiveSlide((prev) => (prev === liveImages.length - 1 ? 0 : prev + 1));
-  };
-  
-  const prevLiveSlide = () => {
-    setCurrentLiveSlide((prev) => (prev === 0 ? liveImages.length - 1 : prev - 1));
+    setCurrentLiveSlide((prev) => (prev === liveVideos.length - 1 ? 0 : prev + 1));
   };
 
-  const nextPhotoSet = () => {
-    const maxSets = Math.ceil(photoImages.length / 3) - 1;
-    setCurrentPhotoSet((prev) => (prev >= maxSets ? 0 : prev + 1));
+  const prevLiveSlide = () => {
+    setCurrentLiveSlide((prev) => (prev === 0 ? liveVideos.length - 1 : prev - 1));
   };
-  
-  const prevPhotoSet = () => {
-    const maxSets = Math.ceil(photoImages.length / 3) - 1;
-    setCurrentPhotoSet((prev) => (prev === 0 ? maxSets : prev - 1));
+
+  const nextPhotoSlide = () => {
+    setCurrentPhotoSlide((prev) => (prev === bandPhotos.length - 1 ? 0 : prev + 1));
   };
-  
-  // Get current set of photos (3 for desktop, 1 for mobile if needed)
-  const photosPerSet = isMobile ? 3 : 3;
-  const currentPhotos = photoImages.slice(currentPhotoSet * photosPerSet, (currentPhotoSet * photosPerSet) + photosPerSet);
+
+  const prevPhotoSlide = () => {
+    setCurrentPhotoSlide((prev) => (prev === 0 ? bandPhotos.length - 1 : prev - 1));
+  };
+
+  // Only one photo per slide, both desktop and mobile
+  const currentPhoto = bandPhotos[currentPhotoSlide];
   
   return (
     <div className={`gallery-page ${isMobile ? 'mobile-gallery' : ''}`}>
-      {/* Live Performance Section */}
+      {/* Live Performance Section (Videos) */}
       <div className="section-container live-section">
         <div className="section-title">
           <h2>LIVEEE!!!</h2>
         </div>
-        
         <div className="carousel-container">
           <button className="carousel-button prev" onClick={prevLiveSlide}>❮</button>
           <div className="carousel-slide">
-            {liveImages.map((image, index) => (
-              <div 
-                key={image.id} 
+            {liveVideos.map((video, index) => (                <div
+                key={video.id}
                 className={`carousel-item ${index === currentLiveSlide ? 'active' : ''}`}
-                style={{ transform: `translateX(${100 * (index - currentLiveSlide)}%)` }}
+                style={{
+                  transform: `translateX(${100 * (index - currentLiveSlide)}%) scale(${index === currentLiveSlide ? 1 : 0.9}) rotateY(${index === currentLiveSlide ? 0 : (index < currentLiveSlide ? 20 : -20)}deg)`,
+                  transition: 'transform 0.7s cubic-bezier(.77,0,.18,1)'
+                }}
               >
-                <img src={image.src} alt={image.alt} />
+                <video
+                  src={video.src}
+                  controls
+                  poster="/images/LOGO-PUNKDBONO.png"
+                >
+                  Your browser does not support the video tag.
+                </video>
               </div>
             ))}
           </div>
           <button className="carousel-button next" onClick={nextLiveSlide}>❯</button>
         </div>
       </div>
-      
-      {/* Photos Section */}
+
+      {/* Photos Section (Band Photos) */}
       <div className="section-container photos-section">
         <div className="section-title">
           <h2>FOTIKOS</h2>
         </div>
-        
         <div className="photo-gallery">
-          <button className="gallery-button prev" onClick={prevPhotoSet}>❮</button>
+          <button className="gallery-button prev" onClick={prevPhotoSlide}>❮</button>
           <div className="photo-grid">
-            {currentPhotos.map((image) => (
-              <div key={image.id} className="photo-item">
-                <img src={image.src} alt={image.alt} />
-              </div>
-            ))}
+            <div className="photo-item">
+              <img
+                src={currentPhoto.src}
+                alt={currentPhoto.alt}
+              />
+            </div>
           </div>
-          <button className="gallery-button next" onClick={nextPhotoSet}>❯</button>
+          <button className="gallery-button next" onClick={nextPhotoSlide}>❯</button>
         </div>
       </div>
       <Footer />
