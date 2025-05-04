@@ -1,3 +1,4 @@
+/* About Page Styles */
 .about-page {
   max-width: 1200px;
   margin: 0 auto;
@@ -41,9 +42,9 @@
   border-radius: 8px;
   overflow: hidden;
   border: 3px solid var(--dark-brown);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-md);
   position: relative;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
 }
 
 .about-image:hover {
@@ -63,6 +64,7 @@
   transform: scale(1.05);
 }
 
+/* Section headings */
 .story-content h2,
 .band-members h2,
 .philosophy-content h2 {
@@ -86,6 +88,7 @@
   background-color: var(--bright-red);
 }
 
+/* Text content */
 .story-content p,
 .philosophy-content p {
   color: var(--light-gray);
@@ -111,10 +114,12 @@
   gap: 2rem;
 }
 
+/* Member cards */
 .member-card {
   background-color: rgba(13, 13, 13, 0.7);
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: var(--shadow-md);
   border-top: 3px solid var(--bright-red);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 100%;
@@ -122,7 +127,7 @@
 
 .member-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-lg);
 }
 
 .member-image {
@@ -187,15 +192,15 @@
   border-radius: 8px;
   padding: 2rem;
   border-left: 4px solid var(--turquoise);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-normal);
 }
 
 .philosophy-container:hover {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-lg);
 }
 
-/* Tablet Landscape Responsive adjustments */
+/* Responsive styles */
 @media (max-width: 1024px) {
   .about-page {
     padding: 1.8rem;
@@ -216,7 +221,6 @@
   }
 }
 
-/* Tablet Responsive adjustments */
 @media (max-width: 992px) {
   .about-container {
     grid-template-columns: 1fr;
@@ -238,7 +242,6 @@
   }
 }
 
-/* Mobile Landscape Responsive adjustments */
 @media (max-width: 768px) {
   .about-page {
     padding: 1.5rem;
@@ -285,7 +288,6 @@
   }
 }
 
-/* Mobile Portrait Responsive adjustments */
 @media (max-width: 576px) {
   .members-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -315,7 +317,6 @@
   }
 }
 
-/* Small Mobile Responsive adjustments */
 @media (max-width: 480px) {
   .about-page {
     padding: 1rem;
@@ -366,7 +367,6 @@
   }
 }
 
-/* Very Small Mobile Responsive adjustments */
 @media (max-width: 360px) {
   .member-image {
     height: 180px;

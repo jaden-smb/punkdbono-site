@@ -1,219 +1,211 @@
-/* Loading Spinner Container */
+/* Loading Spinner styles for diorama component */
 .loading-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--black);
-  z-index: 50;
-  transition: opacity 0.8s ease;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(13, 13, 13, 0.9);
+  z-index: 100;
 }
 
 .loading-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
 }
 
-/* Punk logo animation */
+/* Animated logo spinner */
 .logo-spinner {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
-.logo-spinner .letter {
+.letter {
   display: inline-block;
-  font-size: 2.5rem;
-  font-weight: bold;
   color: var(--turquoise);
-  animation: pulsate 1.5s infinite alternate;
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  animation: bounce 1.2s ease infinite;
+  text-shadow: 2px 2px 0 var(--dark-brown);
 }
 
-.logo-spinner .letter:nth-child(2n) {
-  color: var(--bright-red);
-  animation-delay: 0.2s;
-}
-
-.logo-spinner .letter:nth-child(3n) {
-  animation-delay: 0.3s;
-}
-
-.logo-spinner .letter:nth-child(5) {
-  color: var(--bright-red);
-  animation-delay: 0.5s;
-}
+/* Sequential animation delay for each letter */
+.letter:nth-child(2) { animation-delay: 0.1s; }
+.letter:nth-child(3) { animation-delay: 0.2s; }
+.letter:nth-child(4) { animation-delay: 0.3s; }
+.letter:nth-child(5) { animation-delay: 0.4s; }
+.letter:nth-child(6) { animation-delay: 0.5s; }
+.letter:nth-child(7) { animation-delay: 0.6s; }
+.letter:nth-child(8) { animation-delay: 0.7s; }
+.letter:nth-child(9) { animation-delay: 0.8s; }
+.letter:nth-child(10) { animation-delay: 0.9s; }
 
 /* Guitar loader animation */
 .guitar-loader {
   position: relative;
-  width: 150px;
+  width: 80px;
   height: 100px;
-  margin: 30px 0;
+  margin: 0 auto;
 }
 
 .guitar-body {
   position: absolute;
-  width: 100px;
+  bottom: 0;
+  width: 60px;
   height: 60px;
-  background-color: var(--dark-brown);
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  top: 50%;
-  left: 25px;
-  transform: translateY(-50%);
-  box-shadow: 0 0 15px rgba(242, 27, 7, 0.7);
-  animation: guitarGlow 2s infinite alternate;
+  background-color: var(--bright-red);
+  border-radius: 50% 50% 10% 10%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .guitar-neck {
   position: absolute;
-  width: 80px;
-  height: 12px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 70px;
   background-color: var(--dark-brown);
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  border-radius: 2px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
 }
 
 .guitar-strings {
   position: absolute;
-  width: 150px;
-  height: 50px;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 70px;
 }
 
 .string {
   position: absolute;
-  width: 100%;
-  height: 2px;
-  background-color: var(--light-gray);
-  animation: strumming 0.5s infinite alternate;
+  width: 1px;
+  height: 100%;
+  background-color: #ccc;
+  animation: vibrate 0.5s ease infinite;
 }
 
 .string:nth-child(1) {
-  top: 0;
+  left: -3px;
   animation-delay: 0s;
 }
 
 .string:nth-child(2) {
-  top: 20%;
+  left: 0px;
   animation-delay: 0.1s;
 }
 
 .string:nth-child(3) {
-  top: 40%;
+  left: 3px;
   animation-delay: 0.2s;
 }
 
-.string:nth-child(4) {
-  top: 60%;
-  animation-delay: 0.15s;
-}
-
-.string:nth-child(5) {
-  top: 80%;
-  animation-delay: 0.25s;
-}
-
-.string:nth-child(6) {
-  top: 100%;
-  animation-delay: 0.3s;
-}
-
-/* Loading text */
-.loading-text {
-  font-size: 1.5rem;
-  color: var(--bright-red);
-  margin: 10px 0 5px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.loading-subtext {
-  color: var(--turquoise);
-  font-size: 1rem;
-  opacity: 0.8;
-  animation: flickerText 2s infinite alternate;
+/* Message */
+.loading-message {
+  color: var(--light-gray);
+  font-family: var(--font-handwritten);
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+  animation: fadeInOut 2s ease infinite;
 }
 
 /* Animations */
-@keyframes pulsate {
-  0% {
-    transform: scale(1);
-    text-shadow: 0 0 5px rgba(5, 242, 219, 0.7);
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
   }
-  100% {
-    transform: scale(1.1);
-    text-shadow: 0 0 20px rgba(5, 242, 219, 1), 0 0 30px rgba(5, 242, 219, 0.5);
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
   }
 }
 
-@keyframes strumming {
-  0% {
-    transform: translateY(0);
+@keyframes vibrate {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-1px);
+  }
+  75% {
+    transform: translateX(1px);
+  }
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
     opacity: 0.5;
   }
-  100% {
-    transform: translateY(2px);
+  50% {
     opacity: 1;
-  }
-}
-
-@keyframes guitarGlow {
-  0% {
-    box-shadow: 0 0 15px rgba(242, 27, 7, 0.7);
-  }
-  100% {
-    box-shadow: 0 0 30px rgba(242, 27, 7, 1), 0 0 50px rgba(242, 27, 7, 0.5);
-  }
-}
-
-@keyframes flickerText {
-  0%, 18%, 22%, 25%, 53%, 57%, 100% {
-    opacity: 0.8;
-    text-shadow: 0 0 7px var(--turquoise);
-  }
-  20%, 24%, 55% {
-    opacity: 0.3;
-    text-shadow: none;
   }
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .logo-spinner .letter {
-    font-size: 2rem;
+  .letter {
+    font-size: 1.6rem;
   }
   
   .guitar-loader {
-    transform: scale(0.8);
+    width: 70px;
+    height: 90px;
   }
   
-  .loading-text {
-    font-size: 1.3rem;
+  .guitar-body {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .guitar-neck {
+    width: 8px;
+    height: 60px;
+  }
+  
+  .loading-message {
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .logo-spinner .letter {
-    font-size: 1.5rem;
+  .letter {
+    font-size: 1.4rem;
   }
   
   .guitar-loader {
-    transform: scale(0.6);
+    width: 60px;
+    height: 80px;
   }
   
-  .loading-text {
-    font-size: 1.1rem;
+  .guitar-body {
+    width: 45px;
+    height: 45px;
   }
   
-  .loading-subtext {
-    font-size: 0.9rem;
+  .guitar-neck {
+    width: 7px;
+    height: 50px;
+  }
+  
+  .loading-message {
+    font-size: 1rem;
+  }
+}
+
+/* Accessibility: prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .letter, .string {
+    animation: none;
+  }
+  
+  .loading-message {
+    animation: none;
+    opacity: 1;
   }
 }

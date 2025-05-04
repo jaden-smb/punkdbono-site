@@ -1,3 +1,4 @@
+/* Footer Styles */
 .site-footer {
   background: white;
   border-top: none;
@@ -12,85 +13,82 @@
   margin-top: 2rem;
 }
 
+/* Contact information */
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Enhanced styles for footer sections */
+.footer-section {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.footer-section h3 {
+  color: var(--black);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-title);
+}
+
+.footer-section p {
+  color: var(--black);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-base);
+}
+
+/* Contact info styling */
 .contact-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Covered By Your Grace', cursive;
-  color: black;
+  font-family: var(--font-handwritten);
   font-size: 1.4rem;
-  position: relative;
+  color: var(--black);
 }
 
 .phone-number, .email {
-  margin-bottom: 0.5rem;
-  position: relative;
-  transition: transform 0.3s ease;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  position: relative;
 }
 
+/* Icon styling with pseudoelements for better performance */
 .phone-number:before {
   content: "📞";
   font-size: 1.2rem;
+  margin-right: 10px;
 }
 
 .email:before {
   content: "✉️";
   font-size: 1.2rem;
+  margin-right: 10px;
 }
 
-.phone-number:hover, .email:hover {
-  transform: translateX(5px);
-  color: var(--bright-red);
-}
-
-.footer-section {
-  margin-bottom: 2rem;
-}
-
-.footer-section h3 {
-  color: var(--turquoise);
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--dark-brown);
-}
-
-.footer-section p {
-  color: var(--light-gray);
-  margin-bottom: 0.5rem;
-}
-
+/* Social links styling */
 .social-links {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
   margin-top: 1rem;
-  justify-content: center;
 }
 
 .social-link {
-  color: black;
+  color: var(--black);
   text-decoration: none;
   padding: 0.5rem 1rem;
-  background-color: rgba(5, 242, 219, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
   border-radius: 4px;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(0,0,0,0.1);
+  transition: var(--transition-normal);
 }
 
 .social-link:hover {
@@ -99,60 +97,69 @@
   transform: translateY(-2px);
 }
 
+/* Newsletter form (if needed in the future) */
 .newsletter-form {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 .newsletter-form input {
   padding: 0.75rem;
   border-radius: 4px;
-  border: none;
-  background-color: rgba(242, 242, 242, 0.1);
-  color: var(--light-gray);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+  color: var(--black);
 }
 
 .newsletter-form button {
   padding: 0.75rem;
   background-color: var(--bright-red);
-  color: var(--light-gray);
+  color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
 }
 
 .newsletter-form button:hover {
   background-color: #d31706;
+  transform: translateY(-2px);
 }
 
+/* Footer bottom section */
 .footer-bottom {
   max-width: 1200px;
-  margin: 2rem auto 0;
-  padding: 1.5rem 2rem 0;
+  margin: 1.5rem auto 0;
+  padding: 1rem 2rem 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  border-top: 1px solid rgba(242, 242, 242, 0.1);
-  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .footer-bottom p {
-  color: var(--light-gray);
+  color: var(--black);
   opacity: 0.7;
+  text-align: center;
 }
 
 .footer-links {
   display: flex;
   gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .footer-links a {
-  color: var(--light-gray);
+  color: var(--black);
   opacity: 0.7;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
 }
 
 .footer-links a:hover {
@@ -160,19 +167,8 @@
   opacity: 1;
 }
 
-/* Large screens */
+/* Responsive styles */
 @media (min-width: 1200px) {
-  .site-footer {
-    padding: 3.5rem 0 1.5rem;
-  }
-  
-  .contact-info {
-    font-size: 1.6rem;
-  }
-}
-
-/* Desktop and large tablets */
-@media (max-width: 1024px) {
   .site-footer {
     padding: 3rem 0 5rem;
     clip-path: polygon(0 8%, 5% 0, 10% 8%, 15% 0, 20% 8%, 25% 0, 30% 8%, 35% 0, 40% 8%, 45% 0, 50% 8%, 55% 0, 60% 8%, 65% 0, 70% 8%, 75% 0, 80% 8%, 85% 0, 90% 8%, 95% 0, 100% 8%, 100% 100%, 0 100%);
@@ -184,12 +180,15 @@
   .site-footer {
     padding-top: 2.5rem;
     padding-bottom: 5rem;
-    /* Disable clip-path for tablets */
     clip-path: none;
   }
   
   .contact-info {
     font-size: 1.3rem;
+  }
+  
+  .footer-section h3 {
+    font-size: 1.4rem;
   }
 }
 
@@ -198,8 +197,6 @@
   .site-footer {
     padding-top: 2rem;
     padding-bottom: 6rem;
-    left: 48%;
-    /* Ensure clip-path is disabled for small tablets */
     clip-path: none;
   }
   
@@ -216,20 +213,18 @@
     margin-bottom: 0.7rem;
   }
   
-  .social-links {
-    justify-content: center;
-  }
-  
   .footer-bottom {
-    padding: 1.2rem 1.5rem 0;
     flex-direction: column;
-    gap: 1rem;
     text-align: center;
+    padding: 1rem 1.5rem 0;
   }
   
-  .footer-links {
-    justify-content: center;
-    flex-wrap: wrap;
+  .footer-section h3 {
+    font-size: 1.3rem;
+  }
+  
+  .social-link {
+    padding: 0.4rem 0.8rem;
   }
 }
 
@@ -239,7 +234,6 @@
     padding-top: 1.8rem;
     padding-bottom: 7rem;
     margin-top: 1.8rem;
-    /* Ensure clip-path is disabled for mobile */
     clip-path: none;
   }
   
@@ -247,9 +241,21 @@
     font-size: 1.15rem;
   }
   
+  .footer-content {
+    padding: 0 1.2rem;
+  }
+  
+  .footer-section h3 {
+    font-size: 1.2rem;
+  }
+  
+  .social-links {
+    gap: 0.7rem;
+  }
+  
   .social-link {
-    padding: 0.45rem 0.9rem;
-    font-size: 0.95rem;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -272,17 +278,13 @@
     font-size: 1rem;
   }
   
+  .footer-section h3 {
+    font-size: 1.1rem;
+  }
+  
   .social-link {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
-  }
-  
-  .footer-bottom {
-    padding: 1rem 1.2rem 0;
-  }
-  
-  .footer-links {
-    gap: 1rem;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -300,15 +302,6 @@
   
   .phone-number, .email {
     margin-bottom: 0.5rem;
-  }
-  
-  .social-links {
-    gap: 0.8rem;
-  }
-  
-  .social-link {
-    padding: 0.35rem 0.7rem;
-    font-size: 0.85rem;
   }
 }
 

@@ -22,61 +22,17 @@
   padding-bottom: 80px; /* Increased padding to account for the audio player height */
 }
 
-/* Hero Section */
-.hero-section {
-  padding: 2rem 1rem;
-  text-align: center;
-  margin-bottom: 1rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.band-title {
-  font-size: 4rem;
-  color: var(--bright-red);
-  margin-bottom: 0.5rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.band-subtitle {
-  font-size: 1.5rem;
-  color: var(--light-gray);
-}
-
-/* Medium screens */
+/* Media queries - simplified and consolidated */
 @media (max-width: 992px) {
-  .band-title {
-    font-size: 3.5rem;
-  }
-  
-  .band-subtitle {
-    font-size: 1.4rem;
-  }
-
   .content {
     padding-bottom: 90px;
   }
 }
 
-/* Tablets */
 @media (max-width: 768px) {
   .content {
     padding: 0;
-    padding-bottom: 110px; /* Increased padding for tablet player layout */
-  }
-
-  .hero-section {
-    padding: 1.5rem 1rem;
-  }
-  
-  .band-title {
-    font-size: 3rem;
-  }
-  
-  .band-subtitle {
-    font-size: 1.3rem;
+    padding-bottom: 110px;
   }
   
   /* Optimize background attachment for mobile */
@@ -85,67 +41,15 @@
   }
 }
 
-/* Mobile landscape */
 @media (max-width: 576px) {
   .content {
-    padding-bottom: 140px; /* Further increased padding for mobile player layout */
-  }
-
-  .hero-section {
-    padding: 1.2rem 0.8rem;
-  }
-  
-  .band-title {
-    font-size: 2.7rem;
-  }
-  
-  .band-subtitle {
-    font-size: 1.2rem;
-  }
-}
-
-/* Mobile portrait */
-@media (max-width: 480px) {
-  .hero-section {
-    padding: 1rem 0.8rem;
-  }
-  
-  .band-title {
-    font-size: 2.5rem;
-    letter-spacing: 1px;
-  }
-  
-  .band-subtitle {
-    font-size: 1.1rem;
-  }
-}
-
-/* Small mobile devices */
-@media (max-width: 360px) {
-  .hero-section {
-    padding: 0.8rem 0.6rem;
-  }
-  
-  .band-title {
-    font-size: 2.2rem;
-  }
-  
-  .band-subtitle {
-    font-size: 1rem;
+    padding-bottom: 140px;
   }
 }
 
 /* Landscape orientation for mobile devices */
 @media (max-height: 500px) and (orientation: landscape) {
   .content {
-    padding-bottom: 60px; /* Adjusted for landscape orientation */
-  }
-
-  .hero-section {
-    padding: 0.8rem 1rem;
-  }
-  
-  .band-title {
-    font-size: 2.5rem;
+    padding-bottom: 60px;
   }
 }

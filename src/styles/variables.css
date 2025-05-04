@@ -1,0 +1,35 @@
+/* Central location for all CSS variables */
+:root {
+  /* Colors */
+  --turquoise: #05F2DB;
+  --dark-brown: #730C02;
+  --bright-red: #F21B07;
+  --light-gray: #F2F2F2;
+  --black: #0D0D0D;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+  
+  /* Transitions */
+  --transition-fast: all 0.2s ease;
+  --transition-normal: all 0.3s ease;
+  --transition-slow: all 0.5s ease;
+  
+  /* Fonts */
+  --font-title: 'Rock Salt', cursive;
+  --font-handwritten: 'Covered By Your Grace', cursive;
+  --font-base: 'Arial', sans-serif;
+  
+  /* Borders */
+  --border-accent: 4px solid var(--turquoise);
+  --border-accent-alt: 4px solid var(--bright-red);
+  
+  /* Breakpoints */
+  --breakpoint-xs: 360px;
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}

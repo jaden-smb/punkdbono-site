@@ -1,18 +1,14 @@
+/* Import fonts once */
 @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&family=Covered+By+Your+Grace&display=swap');
 
-/* Base styles */
-:root {
-  --turquoise: #05F2DB;
-  --dark-brown: #730C02;
-  --bright-red: #F21B07;
-  --light-gray: #F2F2F2;
-  --black: #0D0D0D;
-}
+/* Import centralized variables */
+@import './styles/variables.css';
 
+/* Base resets and defaults */
 body, html {
   margin: 0;
   padding: 0;
-  font-family: 'Covered By Your Grace', cursive, 'Arial', sans-serif;
+  font-family: var(--font-handwritten), var(--font-base);
   background-image: url('/images/wall.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -33,100 +29,22 @@ body, html {
   min-height: 100vh;
 }
 
-/* Custom fonts */
+/* Custom font utility classes */
 .title-font {
-  font-family: 'Rock Salt', cursive;
+  font-family: var(--font-title);
 }
 
 .handwritten-font {
-  font-family: 'Covered By Your Grace', cursive;
+  font-family: var(--font-handwritten);
 }
 
-/* Navbar Styles */
-.navbar {
-  background: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 6px 0 0 #fff, 0 8px 0 0 #000, 0 10px 0 0 #fff;
-  clip-path: polygon(0 0, 100% 0, 100% 90%, 98% 100%, 95% 90%, 90% 100%, 85% 90%, 80% 100%, 75% 90%, 70% 100%, 65% 90%, 60% 100%, 55% 90%, 50% 100%, 45% 90%, 40% 100%, 35% 90%, 30% 100%, 25% 90%, 20% 100%, 15% 90%, 10% 100%, 5% 90%, 0 100%);
+/* Content */
+.content {
+  flex: 1;
+  padding: 0 2rem 2rem;
 }
 
-.navbar-logo {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--turquoise);
-  text-shadow: 2px 2px var(--dark-brown);
-  z-index: 100;
-}
-
-.navbar-links {
-  display: flex;
-  list-style: none;
-  gap: 2rem;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar-links li a {
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.4rem;
-  font-family: 'Rock Salt', cursive;
-  letter-spacing: 1px;
-  padding: 0.5rem 0;
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s cubic-bezier(.4,2,.6,1);
-  text-shadow: 2px 2px 0 #000, 4px 4px 0 #05F2DB;
-}
-
-.navbar-links li a:hover, .navbar-links li a.active {
-  color: var(--turquoise);
-  border-bottom: 3px solid var(--turquoise);
-  background: none;
-  text-shadow: 2px 2px 0 #000, 4px 4px 0 #F21B07;
-}
-
-/* Hamburger menu */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 21px;
-  cursor: pointer;
-  z-index: 200; /* Increased z-index to ensure it stays above other elements */
-}
-
-.hamburger span {
-  height: 3px;
-  width: 100%;
-  background-color: black;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-  display: block; /* Ensure spans are displayed as blocks */
-}
-
-.hamburger.active span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-  background-color: black; /* Make active state more visible */
-}
-
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
-  background-color: black; /* Make active state more visible */
-}
-
-/* Hero Section */
+/* Common component styles that don't belong to specific components */
 .hero-section {
   padding: 2rem;
   text-align: center;
@@ -146,123 +64,61 @@ body, html {
   color: var(--light-gray);
 }
 
-/* 3D Diorama Styles */
-.diorama-container {
+/* HomePage punk title graffiti effect */
+.punk-title {
+  font-family: var(--font-title);
+  font-size: 4rem;
+  color: #fff;
+  text-align: center;
+  background: none;
+  padding: 0.5rem 3rem;
+  display: inline-block;
   position: relative;
-  width: 100%;
-  height: 70vh;
-  margin: 0 auto;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 4px solid var(--dark-brown);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: none;
+  margin-bottom: 2rem;
+  text-shadow:
+    -2px -2px 0 var(--turquoise),
+    2px 2px 0 var(--bright-red),
+    4px 4px 0 #000;
+  filter: drop-shadow(0 0 8px var(--turquoise));
 }
 
-.diorama-info {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  background-color: rgba(13, 13, 13, 0.8);
-  color: var(--turquoise);
-  padding: 15px;
-  border-radius: 8px;
-  border-left: 4px solid var(--bright-red);
-  max-width: 300px;
-  pointer-events: none;
+.punk-title::before {
+  content: '';
+  display: none;
 }
 
-.diorama-info h2 {
-  margin: 0 0 10px 0;
-  font-size: 1.5rem;
+/* Media queries - consolidated */
+@media (max-width: 992px) {
+  .punk-title {
+    font-size: 3.5rem;
+  }
 }
 
-.diorama-info p {
-  margin: 5px 0;
-  color: var(--light-gray);
-}
-
-/* Content */
-.content {
-  flex: 1;
-  padding: 0 2rem 2rem 2rem;
-}
-
-/* Responsive adjustments */
 @media (max-width: 768px) {
-  .navbar {
-    padding: 1rem;
-    /* Keep clip-path but adjust it for mobile */
-    clip-path: polygon(0 0, 100% 0, 100% 95%, 98% 100%, 95% 95%, 90% 100%, 85% 95%, 80% 100%, 75% 95%, 70% 100%, 65% 95%, 60% 100%, 55% 95%, 50% 100%, 45% 95%, 40% 100%, 35% 95%, 30% 100%, 25% 95%, 20% 100%, 15% 95%, 10% 100%, 5% 95%, 0 100%);
+  .content {
+    padding: 0 1rem 1rem;
   }
   
-  .hamburger {
-    display: flex;
-    z-index: 250; /* Increased z-index to be above everything else */
+  .punk-title {
+    font-size: 3rem;
   }
   
-  .navbar-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100vh;
-    background-color: var(--black);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    transition: all 0.5s ease;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-    border-left: 2px solid var(--turquoise);
-    z-index: 200;
-  }
-  
-  .navbar-links.active {
-    right: 0;
-  }
-  
-  .navbar-links li {
-    width: 80%;
-    text-align: center;
-  }
-  
-  .navbar-links li a {
-    display: block;
-    padding: 1rem;
-    width: 100%;
+  /* Disable complex clip-paths for performance on mobile */
+  .threesixty-banner, .diorama-text, .navbar {
+    clip-path: none;
   }
   
   .band-title {
     font-size: 3rem;
   }
-  
-  .diorama-container {
-    height: 50vh;
-    border-width: 2px;
-  }
-  
-  .diorama-info {
-    bottom: 10px;
-    left: 10px;
-    padding: 10px;
-    max-width: 80%;
-  }
-  
-  .diorama-info h2 {
-    font-size: 1.2rem;
-  }
-  
-  .content {
-    padding: 0 1rem 1rem 1rem;
-  }
-  
-  /* Disable clip-paths for mobile */
-  .threesixty-banner, .diorama-text {
-    clip-path: none;
-  }
 }
 
 @media (max-width: 480px) {
+  .punk-title {
+    font-size: 2.5rem;
+  }
+  
   .navbar-logo {
     font-size: 1.5rem;
   }
@@ -274,106 +130,18 @@ body, html {
   .band-subtitle {
     font-size: 1.2rem;
   }
-  
-  .diorama-container {
-    height: 45vh;
-  }
-  
-  .diorama-info {
-    bottom: 5px;
-    left: 5px;
-    padding: 8px;
-    max-width: 90%;
-  }
-  
-  .diorama-info h2 {
-    font-size: 1rem;
-    margin-bottom: 5px;
-  }
-  
-  .diorama-info p {
-    font-size: 0.9rem;
-  }
-  
-  /* Ensure all clip-paths are disabled for smaller screens */
-  .navbar, .threesixty-banner, .diorama-text, .video-placeholder {
-    clip-path: none;
+}
+
+@media (max-width: 360px) {
+  .punk-title {
+    font-size: 2rem;
   }
 }
 
-/* HomePage punk title graffiti effect */
-.punk-title {
-  font-family: 'Rock Salt', cursive;
-  font-size: 4rem;
-  color: #fff;
-  text-align: center;
-  background: none;
-  padding: 0.5rem 3rem;
-  display: inline-block;
-  position: relative;
-  border: none;
-  margin-bottom: 2rem;
-  text-shadow:
-    -2px -2px 0 #05F2DB,
-    2px 2px 0 #F21B07,
-    4px 4px 0 #000;
-  filter: drop-shadow(0 0 8px #05F2DB);
-}
-
-.punk-title::before {
-  content: '';
-  display: none;
-}
-
-.band-image {
-  width: 100%;
-  max-width: 800px;
-  margin: 1rem auto;
-  display: block;
-  border: 5px solid var(--black);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-}
-
-.diorama-text {
-  background: #fff;
-  color: #111;
-  padding: 1.5rem;
-  font-family: 'Covered By Your Grace', cursive;
-  font-size: 1.4rem;
-  line-height: 1.4;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  border-radius: 0 0 40px 0/0 0 40px 0;
-  border-left: 8px solid #F21B07;
-  border-bottom: 6px solid #05F2DB;
-  clip-path: polygon(0 0, 100% 0, 100% 90%, 98% 100%, 95% 90%, 90% 100%, 85% 90%, 80% 100%, 75% 90%, 70% 100%, 65% 90%, 60% 100%, 55% 90%, 50% 100%, 45% 90%, 40% 100%, 35% 90%, 30% 100%, 25% 90%, 20% 100%, 15% 90%, 10% 100%, 5% 90%, 0 100%);
-}
-
-.threesixty-banner {
-  background: #F21B07;
-  color: #fff;
-  padding: 0.5rem 2rem;
-  font-family: 'Rock Salt', cursive;
-  font-size: 1.8rem;
-  text-align: center;
-  transform: skew(-2deg);
-  border-radius: 0 0 40px 0/0 0 40px 0;
-  box-shadow: 0 4px 0 #000;
-  clip-path: polygon(0 0, 100% 0, 100% 90%, 98% 100%, 95% 90%, 90% 100%, 85% 90%, 80% 100%, 75% 90%, 70% 100%, 65% 90%, 60% 100%, 55% 90%, 50% 100%, 45% 90%, 40% 100%, 35% 90%, 30% 100%, 25% 90%, 20% 100%, 15% 90%, 10% 100%, 5% 90%, 0 100%);
-}
-
-.video-placeholder {
-  background: #111;
-  width: 100%;
-  height: 400px;
-  margin-top: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px #000b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Rock Salt', cursive;
-  color: #fff;
-  font-size: 2.5rem;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 0 #05F2DB, 4px 4px 0 #F21B07;
+/* For users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
