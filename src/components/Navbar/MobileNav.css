@@ -1,0 +1,110 @@
+/* Mobile Navigation Styles */
+.mobile-nav {
+  display: none; /* Hidden by default, shown in media query */
+  position: fixed;
+  top: 6rem;
+  right: 5rem;
+  z-index: 300; /* Higher than navbar */
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  visibility: visible;
+  opacity: 1;
+}
+
+.mobile-nav.scrolled {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Hamburger menu */
+.mobile-hamburger {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  cursor: pointer;
+  z-index: 350;
+}
+
+.mobile-hamburger span {
+  height: 3px;
+  width: 100%;
+  background-color: black;
+  border-radius: 2px;
+  transition: var(--transition-normal);
+  display: block;
+}
+
+.mobile-hamburger.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+  background-color: black;
+}
+
+.mobile-hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-hamburger.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+  background-color: black;
+}
+
+/* Mobile menu panel */
+.mobile-navbar-links {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  height: 100vh;
+  background-color: var(--light-gray);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  transition: var(--transition-slow);
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+  border-left: 2px solid var(--turquoise);
+  z-index: 300;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.mobile-navbar-links.active {
+  right: 0;
+}
+
+.mobile-navbar-links li {
+  width: 80%;
+  text-align: center;
+}
+
+.mobile-navbar-links li a {
+  display: block;
+  padding: 1rem;
+  width: 100%;
+  color: var(--black);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.4rem;
+  font-family: var(--font-title);
+  letter-spacing: 1px;
+  border-bottom: 3px solid transparent;
+  transition: var(--transition-normal);
+  text-shadow: 2px 2px 0 #000, 4px 4px 0 var(--turquoise);
+}
+
+.mobile-navbar-links li a:hover, 
+.mobile-navbar-links li a.active {
+  color: var(--bright-red);
+  border-bottom: 3px solid var(--turquoise);
+}
+
+/* Only show on mobile screens */
+@media (max-width: 768px) {
+  .mobile-nav {
+    display: block;
+  }
+}
