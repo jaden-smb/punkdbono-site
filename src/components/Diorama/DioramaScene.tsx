@@ -1,6 +1,6 @@
 import { Suspense, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, PresentationControls, Stage, Environment } from '@react-three/drei';
+import { OrbitControls, PresentationControls, Stage, Environment, Stars } from '@react-three/drei';
 import DioramaModel from './DioramaModel';
 import LoadingSpinner from './LoadingSpinner';
 import './Diorama.css';
@@ -41,25 +41,55 @@ const DioramaScene: React.FC<DioramaSceneProps> = ({ isRotating, setIsRotating, 
       {!modelLoaded && <LoadingSpinner />}
       
       <Canvas shadows camera={{ position: isMobile ? [2, 0, 2] : [2, 0, 2] }}>
-        <color attach="background" args={['#0D0D0D']} />
-        <fog attach="fog" args={['#0D0D0D', 10, 50]} />
+        <color attach="background" args={['#050505']} />
+        <fog attach="fog" args={['#050505', 20, 40]} /> {/* Reduced fog density for better visibility */}
         
         <Suspense fallback={null}>
-          <ambientLight intensity={0.4} />
+          {/* Gothic skybox with stars */}
+          <Stars 
+            radius={100} 
+            depth={50} 
+            count={5000} 
+            factor={4} 
+            saturation={0.5} 
+            fade
+            speed={1}
+          />
+          
+          <ambientLight intensity={0.8} /> {/* Increased ambient light for better overall exposure */}
           <spotLight 
-            position={[10, 10, 10]} 
+            position={[10, 15, 10]} 
             angle={0.15} 
-            penumbra={1} 
-            intensity={1} 
+            penumbra={90} 
+            intensity={3.5} 
             color="#05F2DB"
             castShadow 
+            shadow-bias={-0.0001}
           />
           <spotLight 
-            position={[-10, -10, -10]} 
+            position={[-10, -5, -10]} 
             angle={0.2} 
             penumbra={1} 
-            intensity={3} 
+            intensity={4.5} 
             color="#F21B07"
+            castShadow
+          />
+          {/* Additional atmospheric light for gothic effect */}
+          <pointLight
+            position={[0, 10, 0]}
+            intensity={1.8}
+            color="#8A2BE2" // Purple hue for gothic atmosphere
+            distance={900}
+            decay={2}
+          />
+          
+          {/* Additional fill light to brighten dark areas */}
+          <pointLight
+            position={[0, -5, 0]}
+            intensity={1.2}
+            color="#ffffff"
+            distance={15}
+            decay={2}
           />
           
           <PresentationControls
@@ -70,7 +100,9 @@ const DioramaScene: React.FC<DioramaSceneProps> = ({ isRotating, setIsRotating, 
           >
             <Stage 
               environment="night" 
-              intensity={0.5}
+              intensity={1.2} // Increased intensity for better overall visibility
+              preset="rembrandt" // More dramatic lighting
+              shadows={{ type: 'contact', opacity: 0.6, blur: 2 }}
             >
               <DioramaModel 
                 isRotating={isRotating}
@@ -79,7 +111,13 @@ const DioramaScene: React.FC<DioramaSceneProps> = ({ isRotating, setIsRotating, 
               />
             </Stage>
           </PresentationControls>
-          <Environment preset="night" />
+          {/* Custom environment with night preset to enhance gothic feel */}
+          <Environment 
+            preset="night" 
+            background={false} 
+            blur={0.8}
+          />
+          
           <OrbitControls 
             enablePan={false} 
             maxPolarAngle={Math.PI / 2} 

@@ -116,6 +116,15 @@
   transition: all 0.3s ease;
 }
 
+.diorama-text .interaction-tip {
+  margin-top: 1rem;
+  padding: 0.3rem 0.6rem;
+  background-color: rgba(5, 153, 138, 0.15);
+  border-left: 3px solid #05998a;
+  font-size: 1.2rem;
+  color: #333;
+}
+
 /* 360 degree section */
 .threesixty-section {
   margin: 2rem 0;
@@ -256,6 +265,11 @@
     font-size: 1.2rem;
     padding: 1.2rem;
     margin-top: -1rem;
+  }
+  
+  .diorama-text .interaction-tip {
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
   }
   
   .threesixty-banner {

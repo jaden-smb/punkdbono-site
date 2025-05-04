@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import DioramaScene from '../../components/Diorama/DioramaScene';
-import Footer from '../../components/Footer/Footer';
 // Changed from direct import to URL reference
 import bandImage from '/images/INICIO-BANDA.jpg';
 import './HomePage.css';
@@ -48,9 +47,17 @@ const HomePage = () => {
             
             <div className="diorama-text">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                {!isMobile && " Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan"}
+                Explora el universo de nuestra banda a través de este diorama 3D interactivo.
+                {isMobile ? 
+                  " Toca y arrastra para rotar la escena. Pellizca para acercar y alejar." : 
+                  " Usa tu ratón para rotar la escena. Mantén presionado el clic izquierdo y arrastra para moverte. Desplázate para acercar y alejar."
+                }
+              </p>
+              <p className="interaction-tip">
+                {isRotating ? 
+                  "✓ Rotación automática activada. Haz clic en el modelo para tomar el control." : 
+                  "✓ Control manual activo. Haz doble clic en cualquier parte del modelo para activar la rotación automática."
+                }
               </p>
             </div>
           </div>
