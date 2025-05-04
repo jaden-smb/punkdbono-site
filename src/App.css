@@ -104,11 +104,6 @@ body, html {
     font-size: 3rem;
   }
   
-  /* Disable complex clip-paths for performance on mobile */
-  .threesixty-banner, .diorama-text, .navbar {
-    clip-path: none;
-  }
-  
   .band-title {
     font-size: 3rem;
   }

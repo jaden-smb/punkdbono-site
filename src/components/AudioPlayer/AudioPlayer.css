@@ -4,7 +4,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: var(--black);
+  background-color: var(--light-gray);
   border-top: 2px solid var(--turquoise);
   padding: 10px 20px;
   display: flex;
@@ -12,6 +12,7 @@
   justify-content: space-between;
   z-index: 1000;
   height: 70px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Player controls section */
@@ -23,37 +24,46 @@
 
 /* Basic control button */
 .control-btn {
-  background: none;
-  border: none;
+  background-color: var(--black);
+  border: 2px solid var(--turquoise);
+  border-radius: 8px;
   cursor: pointer;
   color: var(--light-gray);
-  padding: 5px;
+  padding: 5px 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: var(--transition-fast);
   height: auto;
   min-height: auto;
+  transform: translateY(0);
+  box-shadow: 0 4px 0 0 var(--turquoise);
 }
 
 .control-btn:hover {
   color: var(--turquoise);
-  transform: scale(1.1);
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 0 var(--turquoise);
 }
 
 /* Play/pause button */
 .play-btn {
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background-color: var(--turquoise);
-  color: var(--black);
+  background-color: var(--black);
+  border: 2px solid var(--turquoise);
+  color: var(--turquoise);
   font-size: 1.2rem;
+  box-shadow: 0 4px 0 0 var(--turquoise);
+  margin: 0 4px;
 }
 
 .play-btn:hover {
-  background-color: var(--bright-red);
-  color: var(--light-gray);
+  background-color: var(--black);
+  color: var(--bright-red);
+  border-color: var(--bright-red);
+  box-shadow: 0 2px 0 0 var(--bright-red);
 }
 
 /* Progress bar section */
@@ -66,20 +76,22 @@
 }
 
 .time {
-  color: var(--light-gray);
+  color: var(--black);
   font-size: 0.8rem;
   min-width: 40px;
   font-family: var(--font-base);
+  font-weight: 500;
 }
 
 .progress-bar {
   flex: 1;
   height: 5px;
   appearance: none;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   outline: none;
   cursor: pointer;
+  border: 1px solid var(--turquoise);
 }
 
 /* Custom slider thumb */
@@ -120,30 +132,34 @@
 }
 
 .track-name {
-  color: var(--light-gray);
+  color: var(--black);
   font-family: var(--font-handwritten);
   font-size: 1.1rem;
+  font-weight: 600;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .audio-player {
-    height: 100px;
+    height: 135px;
     flex-direction: column;
-    padding: 10px;
-    gap: 10px;
+    padding: 10px 15px;
+    gap: 8px;
   }
   
   .progress-container {
     width: 100%;
     margin: 0;
-    order: 1;
+    padding: 0 5px;
+    order: 2;
   }
   
   .player-controls {
     width: 100%;
     justify-content: center;
-    order: 2;
+    order: 1;
+    padding: 5px 0;
+    margin-bottom: 5px;
   }
   
   .track-info {
@@ -156,17 +172,38 @@
 }
 
 @media (max-width: 576px) {
+  .audio-player {
+    height: 170px;
+    padding: 10px;
+  }
+
   .player-controls {
-    gap: 8px;
+    gap: 15px;
+    margin-bottom: 8px;
+  }
+  
+  .control-btn {
+    padding: 3px 8px;
+    min-width: 40px;
   }
   
   .play-btn {
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
   }
   
   .time {
     font-size: 0.7rem;
     min-width: 35px;
+  }
+
+  .progress-container {
+    margin-top: 0;
+    padding: 0 8px;
+    gap: 8px;
+  }
+  
+  .progress-bar {
+    height: 4px;
   }
 }
