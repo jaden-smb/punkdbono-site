@@ -5,38 +5,38 @@ import './GalleryPage.css';
  * Gallery page with live performance carousel and photo grid
  */
 const GalleryPage = () => {
-  // Use actual band videos and photos from public folder
+  // Use optimized band videos and photos from public folder
   const liveVideos = [
-    { id: 1, src: '/images/videos-live/VID-20241124-WA0001.mp4', alt: 'Live Video 1', caption: 'Live Show 1' },
-    { id: 2, src: '/images/videos-live/VID-20241124-WA0002.mp4', alt: 'Live Video 2', caption: 'Live Show 2' },
-    { id: 3, src: '/images/videos-live/VID-20241124-WA0003.mp4', alt: 'Live Video 3', caption: 'Live Show 3' },
-    { id: 4, src: '/images/videos-live/VID-20241124-WA0004.mp4', alt: 'Live Video 4', caption: 'Live Show 4' },
-    { id: 5, src: '/images/videos-live/VID-20241124-WA0005.mp4', alt: 'Live Video 5', caption: 'Live Show 5' },
-    { id: 6, src: '/images/videos-live/VID-20241124-WA0006.mp4', alt: 'Live Video 6', caption: 'Live Show 6' },
-    { id: 7, src: '/images/videos-live/VID-20241124-WA0009.mp4', alt: 'Live Video 7', caption: 'Live Show 7' },
-    { id: 8, src: '/images/videos-live/VID-20241124-WA0024.mp4', alt: 'Live Video 8', caption: 'Live Show 8' },
-    { id: 9, src: '/images/videos-live/VID-20241124-WA0025.mp4', alt: 'Live Video 9', caption: 'Live Show 9' },
+    { id: 1, src: '/images/videos-live/optimized/VID-20241124-WA0001.mp4', alt: 'Live Video 1', caption: 'Live Show 1' },
+    { id: 2, src: '/images/videos-live/optimized/VID-20241124-WA0002.mp4', alt: 'Live Video 2', caption: 'Live Show 2' },
+    { id: 3, src: '/images/videos-live/optimized/VID-20241124-WA0003.mp4', alt: 'Live Video 3', caption: 'Live Show 3' },
+    { id: 4, src: '/images/videos-live/optimized/VID-20241124-WA0004.mp4', alt: 'Live Video 4', caption: 'Live Show 4' },
+    { id: 5, src: '/images/videos-live/optimized/VID-20241124-WA0005.mp4', alt: 'Live Video 5', caption: 'Live Show 5' },
+    { id: 6, src: '/images/videos-live/optimized/VID-20241124-WA0006.mp4', alt: 'Live Video 6', caption: 'Live Show 6' },
+    { id: 7, src: '/images/videos-live/optimized/VID-20241124-WA0009.mp4', alt: 'Live Video 7', caption: 'Live Show 7' },
+    { id: 8, src: '/images/videos-live/optimized/VID-20241124-WA0024.mp4', alt: 'Live Video 8', caption: 'Live Show 8' },
+    { id: 9, src: '/images/videos-live/optimized/VID-20241124-WA0025.mp4', alt: 'Live Video 9', caption: 'Live Show 9' },
   ];
 
   const bandPhotos = [
-    { id: 1, src: '/images/band/IMG-20241125-WA0115.jpg', alt: 'Band Photo 1' },
-    { id: 2, src: '/images/band/IMG-20241125-WA0117.jpg', alt: 'Band Photo 2' },
-    { id: 3, src: '/images/band/IMG-20241125-WA0119.jpg', alt: 'Band Photo 3' },
-    { id: 4, src: '/images/band/IMG-20241125-WA0121.jpg', alt: 'Band Photo 4' },
-    { id: 5, src: '/images/band/IMG-20241125-WA0123.jpg', alt: 'Band Photo 5' },
-    { id: 6, src: '/images/band/IMG-20241125-WA0125.jpg', alt: 'Band Photo 6' },
-    { id: 7, src: '/images/band/IMG-20241125-WA0127.jpg', alt: 'Band Photo 7' },
-    { id: 8, src: '/images/band/IMG-20241125-WA0129.jpg', alt: 'Band Photo 8' },
-    { id: 9, src: '/images/band/IMG-20241125-WA0131.jpg', alt: 'Band Photo 9' },
-    { id: 10, src: '/images/band/IMG-20241125-WA0133.jpg', alt: 'Band Photo 10' },
-    { id: 11, src: '/images/band/IMG-20241125-WA0135.jpg', alt: 'Band Photo 11' },
-    { id: 12, src: '/images/band/IMG-20241125-WA0137.jpg', alt: 'Band Photo 12' },
-    { id: 13, src: '/images/band/IMG-20241125-WA0139.jpg', alt: 'Band Photo 13' },
-    { id: 14, src: '/images/band/IMG-20241125-WA0141.jpg', alt: 'Band Photo 14' },
-    { id: 15, src: '/images/band/IMG-20241125-WA0143.jpg', alt: 'Band Photo 15' },
-    { id: 16, src: '/images/band/IMG-20241125-WA0145.jpg', alt: 'Band Photo 16' },
-    { id: 17, src: '/images/band/IMG-20241125-WA0147.jpg', alt: 'Band Photo 17' },
-    { id: 18, src: '/images/band/IMG-20241125-WA0149.jpg', alt: 'Band Photo 18' },
+    { id: 1, src: '/images/band/optimized/IMG-20241125-WA0115.jpg', alt: 'Band Photo 1' },
+    { id: 2, src: '/images/band/optimized/IMG-20241125-WA0117.jpg', alt: 'Band Photo 2' },
+    { id: 3, src: '/images/band/optimized/IMG-20241125-WA0119.jpg', alt: 'Band Photo 3' },
+    { id: 4, src: '/images/band/optimized/IMG-20241125-WA0121.jpg', alt: 'Band Photo 4' },
+    { id: 5, src: '/images/band/optimized/IMG-20241125-WA0123.jpg', alt: 'Band Photo 5' },
+    { id: 6, src: '/images/band/optimized/IMG-20241125-WA0125.jpg', alt: 'Band Photo 6' },
+    { id: 7, src: '/images/band/optimized/IMG-20241125-WA0127.jpg', alt: 'Band Photo 7' },
+    { id: 8, src: '/images/band/optimized/IMG-20241125-WA0129.jpg', alt: 'Band Photo 8' },
+    { id: 9, src: '/images/band/optimized/IMG-20241125-WA0131.jpg', alt: 'Band Photo 9' },
+    { id: 10, src: '/images/band/optimized/IMG-20241125-WA0133.jpg', alt: 'Band Photo 10' },
+    { id: 11, src: '/images/band/optimized/IMG-20241125-WA0135.jpg', alt: 'Band Photo 11' },
+    { id: 12, src: '/images/band/optimized/IMG-20241125-WA0137.jpg', alt: 'Band Photo 12' },
+    { id: 13, src: '/images/band/optimized/IMG-20241125-WA0139.jpg', alt: 'Band Photo 13' },
+    { id: 14, src: '/images/band/optimized/IMG-20241125-WA0141.jpg', alt: 'Band Photo 14' },
+    { id: 15, src: '/images/band/optimized/IMG-20241125-WA0143.jpg', alt: 'Band Photo 15' },
+    { id: 16, src: '/images/band/optimized/IMG-20241125-WA0145.jpg', alt: 'Band Photo 16' },
+    { id: 17, src: '/images/band/optimized/IMG-20241125-WA0147.jpg', alt: 'Band Photo 17' },
+    { id: 18, src: '/images/band/optimized/IMG-20241125-WA0149.jpg', alt: 'Band Photo 18' },
   ];
   
   const [currentLiveSlide, setCurrentLiveSlide] = useState(0);

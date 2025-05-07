@@ -64,10 +64,10 @@ const HomePage = () => {
             <iframe 
               width="100%" 
               height="100%" 
-              src="https://www.youtube.com/embed/EH3Y3F6RVhU" 
+              src="https://www.youtube.com/embed/EH3Y3F6RVhU?vr=1&gyroscope=1" 
               title="PunkD'Bono Video"
               frameBorder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; vr" 
               allowFullScreen
             ></iframe>
           </div>
