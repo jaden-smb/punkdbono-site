@@ -8,7 +8,6 @@ import './HomePage.css';
  * Home page component that matches the design in the image
  */
 const HomePage = () => {
-  const [isRotating, setIsRotating] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   
   // Check if device is mobile
@@ -39,11 +38,7 @@ const HomePage = () => {
           
           {/* 3D Diorama */}
           <div className="diorama-wrapper">
-            <DioramaScene 
-              isRotating={isRotating} 
-              setIsRotating={setIsRotating} 
-              isMobile={isMobile}
-            />
+            <DioramaScene isMobile={isMobile} />
             
             <div className="diorama-text">
               <p>
@@ -51,12 +46,6 @@ const HomePage = () => {
                 {isMobile ? 
                   " Toca y arrastra para rotar la escena. Pellizca para acercar y alejar." : 
                   " Usa tu ratón para rotar la escena. Mantén presionado el clic izquierdo y arrastra para moverte. Desplázate para acercar y alejar."
-                }
-              </p>
-              <p className="interaction-tip">
-                {isRotating ? 
-                  "✓ Rotación automática activada. Haz clic en el modelo para tomar el control." : 
-                  "✓ Control manual activo. Haz doble clic en cualquier parte del modelo para activar la rotación automática."
                 }
               </p>
             </div>
@@ -71,7 +60,17 @@ const HomePage = () => {
         
         <div className="video-section section-container">
           <h2 className="section-title-home">VIDEO</h2>
-          <div className="video-placeholder">VIDEO</div>
+          <div className="video-container">
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src="https://www.youtube.com/embed/EH3Y3F6RVhU" 
+              title="PunkD'Bono Video"
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
       </div>
 

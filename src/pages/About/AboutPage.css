@@ -3,21 +3,41 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Page Header - Punk styled title */
 .page-header {
   text-align: center;
   margin-bottom: 3rem;
   position: relative;
+  width: 100%;
+  z-index: 2;
 }
 
 .page-header h1 {
-  font-size: 3rem;
-  color: var(--bright-red);
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
+  font-family: var(--font-title);
+  font-size: 2.5rem;
+  color: var(--turquoise);
+  text-shadow: 0 0 12px var(--bright-red), 0 0 24px var(--turquoise);
   letter-spacing: 2px;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+  font-weight: 900;
+  -webkit-text-stroke: 2px var(--bright-red);
+  filter: drop-shadow(0 0 8px var(--turquoise));
+  transform: skew(-2deg, -2deg);
+  background-color: #f5f5dc;
+  display: inline-block;
+  padding: 0.3rem 2.5rem;
+  position: relative;
+  z-index: 2;
+  box-shadow: var(--shadow-sm);
+  clip-path: polygon(
+    0% 5%, 5% 0%, 95% 2%, 100% 8%, 
+    98% 95%, 90% 100%, 10% 98%, 0% 90%
+  );
 }
 
 .page-header p {
@@ -99,30 +119,63 @@
 
 /* Band Members Section */
 .band-members {
-  margin-bottom: 4rem;
+  margin: 3rem auto;
   text-align: center;
+  width: 100%;
+  position: relative;
 }
 
 .band-members h2 {
+  font-family: var(--font-title);
+  font-size: 2.5rem;
+  color: var(--bright-red);
+  text-shadow: 0 0 12px var(--turquoise), 0 0 24px var(--bright-red);
+  letter-spacing: 2px;
+  font-weight: 900;
+  -webkit-text-stroke: 2px var(--turquoise);
+  filter: drop-shadow(0 0 8px var(--bright-red));
+  transform: skew(2deg, 2deg);
+  background-color: #f5f5dc;
+  display: inline-block;
+  padding: 0.3rem 2.5rem;
+  position: relative;
   margin-bottom: 2rem;
-  text-align: left;
+  z-index: 2;
+  box-shadow: var(--shadow-sm);
+  clip-path: polygon(
+    0% 5%, 5% 0%, 95% 2%, 100% 8%, 
+    98% 95%, 90% 100%, 10% 98%, 0% 90%
+  );
+  border-bottom: none;
+  text-align: center;
 }
 
+.band-members h2::after {
+  display: none;
+}
+
+/* Members Grid - Desktop: Row layout */
 .members-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Member cards */
 .member-card {
+  flex: 1;
   background-color: rgba(13, 13, 13, 0.7);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: var(--shadow-md);
   border-top: 3px solid var(--bright-red);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: var(--transition-normal);
   height: 100%;
+  max-width: 350px;
 }
 
 .member-card:hover {
@@ -166,14 +219,25 @@
 .member-info h3 {
   font-size: 1.5rem;
   color: var(--turquoise);
-  margin-bottom: 0.3rem;
+  margin-bottom: 1.2rem;
+  margin-right: 0.5rem;
 }
 
 .member-info h4 {
-  font-size: 1rem;
-  color: var(--bright-red);
-  margin-bottom: 1rem;
-  opacity: 0.9;
+  font-size: 1.2rem;
+  color: var(--turquoise);
+  margin: 0.7rem 0 1rem;
+  padding: 0.3rem 0.6rem;
+  display: inline-block;
+  background: var(--black);
+  border: 2px solid var(--bright-red);
+  border-radius: 4px;
+  position: relative;
+  text-shadow: 0 0 5px var(--turquoise), 0 0 10px var(--turquoise);
+  font-weight: bold;
+  transform: rotate(-2deg);
+  box-shadow: 0 0 10px rgba(242, 27, 7, 0.6);
+  letter-spacing: 1px;
 }
 
 .member-info p {
@@ -200,6 +264,138 @@
   box-shadow: var(--shadow-lg);
 }
 
+/* 3D styling for member cards */
+.member-card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  position: relative;
+  background: linear-gradient(145deg, var(--black), #1a1a1a);
+  border: 4px solid var(--bright-red);
+  border-radius: 10px;
+  box-shadow: 
+    0 0 40px 0 var(--turquoise), 
+    0 0 0 8px var(--black) inset;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.member-card-3d:hover {
+  transform: translateY(-15px) rotateX(5deg);
+  box-shadow: 
+    0 15px 30px rgba(242, 27, 7, 0.4),
+    0 10px 10px rgba(5, 242, 219, 0.3);
+  border-color: var(--turquoise);
+}
+
+.member-card-3d::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(45deg, var(--bright-red), var(--turquoise));
+  z-index: -1;
+  transform: translateZ(-10px);
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 15px;
+}
+
+.member-card-3d:hover::before {
+  opacity: 0.7;
+}
+
+.member-photo-3d {
+  filter: contrast(1.1) saturate(1.2);
+  transition: all 0.5s ease;
+  transform: translateZ(20px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.member-card-3d:hover .member-photo-3d {
+  transform: translateZ(30px) scale(1.05);
+}
+
+.member-card-3d .member-info {
+  transform: translateZ(10px);
+  background: rgba(13, 13, 13, 0.85);
+  backdrop-filter: blur(5px);
+  border-top: 3px solid var(--turquoise);
+  padding: 1.8rem;
+}
+
+.member-card-3d .member-info h3 {
+  color: var(--turquoise);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.member-card-3d .member-info h3::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--bright-red), transparent);
+}
+
+.member-card-3d .member-info h4 {
+  color: var(--turquoise);
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, rgba(242, 27, 7, 0.2), transparent);
+  border-left: 3px solid var(--bright-red);
+  border-right: 3px solid var(--bright-red);
+  margin: 1rem 0;
+  padding: 0.5rem 0.8rem;
+  position: relative;
+  display: inline-block;
+  transform: skew(-5deg) rotate(-1deg);
+  text-shadow: 0 0 8px var(--turquoise);
+  box-shadow: 0 0 15px rgba(5, 242, 219, 0.3);
+  transition: all 0.3s ease;
+}
+
+.member-card-3d:hover .member-info h4 {
+  transform: skew(-8deg) rotate(-2deg) translateZ(5px) scale(1.05);
+  text-shadow: 0 0 12px var(--turquoise), 0 0 20px var(--turquoise);
+  box-shadow: 0 0 20px rgba(5, 242, 219, 0.5);
+}
+
+.member-card-3d .member-info p {
+  color: var(--light-gray);
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+/* Media queries for responsive 3D cards */
+@media (max-width: 768px) {
+  .member-card-3d {
+    transform: none !important; /* Disable 3D transforms on smaller screens */
+  }
+  
+  .member-card-3d:hover {
+    transform: translateY(-10px) !important;
+  }
+  
+  .member-photo-3d {
+    transform: none !important;
+  }
+  
+  .member-card-3d:hover .member-photo-3d {
+    transform: scale(1.05) !important;
+  }
+}
+
 /* Responsive styles */
 @media (max-width: 1024px) {
   .about-page {
@@ -222,37 +418,30 @@
 }
 
 @media (max-width: 992px) {
-  .about-container {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .about-image {
-    max-width: 600px;
-    margin: 0 auto 1.5rem;
-  }
-  
   .members-grid {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   
-  .member-image {
-    height: 240px;
+  .member-card, .member-card-3d {
+    flex: 0 1 calc(50% - 2rem);
+    max-width: 300px;
   }
 }
 
 @media (max-width: 768px) {
-  .about-page {
-    padding: 1.5rem;
-  }
-  
-  .page-header {
-    margin-bottom: 2rem;
-  }
-  
   .page-header h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    padding: 0.3rem 1.5rem;
+  }
+  
+  .band-members h2 {
+    font-size: 1.8rem;
+    padding: 0.2rem 1.2rem;
+  }
+  
+  .about-page {
+    padding: 1rem;
   }
   
   .story-content h2,
@@ -290,8 +479,29 @@
 
 @media (max-width: 576px) {
   .members-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .member-card, .member-card-3d {
+    flex: 0 1 100%;
+    width: 100%;
+    max-width: 320px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .page-header h1 {
+    font-size: 1.6rem;
+    padding: 0.2rem 1rem;
+  }
+  
+  .band-members h2 {
+    font-size: 1.5rem;
+    padding: 0.2rem 1rem;
+  }
+  
+  .about-page {
+    padding: 0.8rem;
   }
   
   .member-image {
@@ -307,27 +517,31 @@
   }
   
   .member-info h4 {
-    font-size: 0.9rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    padding: 0.2rem 0.5rem;
+    margin: 0.6rem 0 0.8rem;
+    transform: rotate(-1deg);
   }
   
   .member-info p {
     font-size: 0.9rem;
     line-height: 1.4;
   }
+  
+  .member-card-3d .member-info h4 {
+    font-size: 1.1rem;
+    padding: 0.3rem 0.6rem;
+    letter-spacing: 1px;
+  }
 }
 
 @media (max-width: 480px) {
-  .about-page {
-    padding: 1rem;
-  }
-  
   .page-header h1 {
-    font-size: 2rem;
+    font-size: 1.4rem;
   }
   
-  .page-header p {
-    font-size: 1rem;
+  .band-members h2 {
+    font-size: 1.3rem;
   }
   
   .story-content h2,
@@ -365,6 +579,19 @@
     padding: 1.5rem;
     border-width: 3px;
   }
+  
+  .member-info h4 {
+    font-size: 1rem;
+    padding: 0.2rem 0.4rem;
+    margin: 0.5rem 0 0.7rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .member-card-3d .member-info h4 {
+    font-size: 1rem;
+    padding: 0.2rem 0.5rem;
+    letter-spacing: 0.5px;
+  }
 }
 
 @media (max-width: 360px) {
@@ -375,4 +602,22 @@
   .philosophy-container {
     padding: 1.2rem;
   }
+  
+  .member-info h4, 
+  .member-card-3d .member-info h4 {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+/* Section Container like gallery page */
+.band-section-container {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  background: linear-gradient(135deg, var(--black) 60%, var(--bright-red) 100%);
+  border: 4px solid var(--turquoise);
+  box-shadow: 0 0 40px 0 var(--bright-red), 0 0 0 8px var(--black) inset;
+  border-radius: 18px;
+  padding: 2rem 1rem;
 }

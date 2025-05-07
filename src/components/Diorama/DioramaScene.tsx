@@ -1,21 +1,71 @@
-import { Suspense, useState, useEffect } from 'react';
+import { Suspense, useState, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PresentationControls, Stage, Environment, Stars } from '@react-three/drei';
-import DioramaModel from './DioramaModel';
+import DioramaModel, { MODELS, preloadAllModels } from './DioramaModel';
 import LoadingSpinner from './LoadingSpinner';
 import './Diorama.css';
 
 interface DioramaSceneProps {
-  isRotating: boolean;
-  setIsRotating: (isRotating: boolean) => void;
   isMobile: boolean;
 }
 
 /**
  * DioramaScene component that wraps the 3D scene and controls
  */
-const DioramaScene: React.FC<DioramaSceneProps> = ({ isRotating, setIsRotating, isMobile }) => {
+const DioramaScene: React.FC<DioramaSceneProps> = ({ isMobile }) => {
   const [modelLoaded, setModelLoaded] = useState(false);
+  const [currentModelIndex, setCurrentModelIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [dioramaActivated, setDioramaActivated] = useState(false);
+  const [modelsPreloaded, setModelsPreloaded] = useState(false);
+  const animationInterval = useRef<number | null>(null);
+  
+  // Function to switch to the next model
+  const nextModel = () => {
+    setCurrentModelIndex((prev) => (prev + 1) % MODELS.length);
+  };
+
+  // Function to switch to the previous model
+  const prevModel = () => {
+    setCurrentModelIndex((prev) => (prev - 1 + MODELS.length) % MODELS.length);
+  };
+  
+  // Toggle animation playback
+  const togglePlayback = () => {
+    setIsPlaying(prev => !prev);
+  };
+  
+  // Activate the diorama and start preloading models
+  const activateDiorama = () => {
+    setDioramaActivated(true);
+    
+    // Start preloading models after activation
+    setTimeout(() => {
+      preloadAllModels();
+      setModelsPreloaded(true);
+    }, 100);
+  };
+  
+  // Handle animation playback
+  useEffect(() => {
+    if (isPlaying) {
+      // Start animation with a frame rate of about 5 frames per second (200ms)
+      animationInterval.current = window.setInterval(() => {
+        nextModel();
+      }, 200);
+    } else if (animationInterval.current) {
+      // Stop animation
+      clearInterval(animationInterval.current);
+      animationInterval.current = null;
+    }
+    
+    // Clean up interval on component unmount
+    return () => {
+      if (animationInterval.current) {
+        clearInterval(animationInterval.current);
+      }
+    };
+  }, [isPlaying]);
   
   // Hide loading spinner after model loads with a small delay for smoother transition
   useEffect(() => {
@@ -36,13 +86,29 @@ const DioramaScene: React.FC<DioramaSceneProps> = ({ isRotating, setIsRotating, 
     }
   }, [modelLoaded]);
   
+  if (!dioramaActivated) {
+    return (
+      <div className="diorama-container">
+        <div className="diorama-activate-overlay">
+          <button 
+            className="diorama-activate-button" 
+            onClick={activateDiorama}
+            aria-label="Activate 3D Diorama"
+          >
+            <div className="button-icon">▶</div>
+            <div className="button-text">PLAYYY</div>
+          </button>
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <div className="diorama-container">
       {!modelLoaded && <LoadingSpinner />}
       
-      <Canvas shadows camera={{ position: isMobile ? [2, 0, 2] : [2, 0, 2] }}>
+      <Canvas shadows={false} camera={{ position: isMobile ? [2, 0, 2] : [2, 0, 2] }}>
         <color attach="background" args={['#050505']} />
-        <fog attach="fog" args={['#050505', 20, 40]} /> {/* Reduced fog density for better visibility */}
         
         <Suspense fallback={null}>
           {/* Gothic skybox with stars */}
@@ -56,28 +122,27 @@ const DioramaScene: React.FC<DioramaSceneProps> = ({ isRotating, setIsRotating, 
             speed={1}
           />
           
-          <ambientLight intensity={0.8} /> {/* Increased ambient light for better overall exposure */}
+          <ambientLight intensity={2.0} /> {/* Increased ambient light for full illumination */}
           <spotLight 
             position={[10, 15, 10]} 
             angle={0.15} 
             penumbra={90} 
-            intensity={3.5} 
+            intensity={5.0} 
             color="#05F2DB"
-            castShadow 
-            shadow-bias={-0.0001}
+            castShadow={false}
           />
           <spotLight 
             position={[-10, -5, -10]} 
             angle={0.2} 
             penumbra={1} 
-            intensity={4.5} 
+            intensity={6.0} 
             color="#F21B07"
-            castShadow
+            castShadow={false}
           />
           {/* Additional atmospheric light for gothic effect */}
           <pointLight
             position={[0, 10, 0]}
-            intensity={1.8}
+            intensity={2.5}
             color="#8A2BE2" // Purple hue for gothic atmosphere
             distance={900}
             decay={2}
@@ -86,9 +151,26 @@ const DioramaScene: React.FC<DioramaSceneProps> = ({ isRotating, setIsRotating, 
           {/* Additional fill light to brighten dark areas */}
           <pointLight
             position={[0, -5, 0]}
-            intensity={1.2}
+            intensity={2.0}
             color="#ffffff"
             distance={15}
+            decay={2}
+          />
+          
+          {/* Add more fill lights to eliminate all shadows */}
+          <pointLight
+            position={[5, 0, 5]}
+            intensity={2.0}
+            color="#ffffff"
+            distance={90}
+            decay={2}
+          />
+          
+          <pointLight
+            position={[-3, 0, -5]}
+            intensity={2.0}
+            color="#ffffff"
+            distance={90}
             decay={2}
           />
           
@@ -100,14 +182,13 @@ const DioramaScene: React.FC<DioramaSceneProps> = ({ isRotating, setIsRotating, 
           >
             <Stage 
               environment="night" 
-              intensity={1.2} // Increased intensity for better overall visibility
+              intensity={1} // Increased intensity for better overall visibility
               preset="rembrandt" // More dramatic lighting
-              shadows={{ type: 'contact', opacity: 0.6, blur: 2 }}
+              shadows={false} // Disable shadows in Stage component
             >
               <DioramaModel 
-                isRotating={isRotating}
-                onClick={() => setIsRotating(!isRotating)}
                 onLoad={() => setModelLoaded(true)}
+                modelIndex={currentModelIndex}
               />
             </Stage>
           </PresentationControls>
@@ -128,6 +209,17 @@ const DioramaScene: React.FC<DioramaSceneProps> = ({ isRotating, setIsRotating, 
           />
         </Suspense>
       </Canvas>
+      
+      <div className="model-controls">
+        <button onClick={prevModel} className="model-button">Previous</button>
+        <button 
+          onClick={togglePlayback} 
+          className={`model-button ${isPlaying ? 'active' : ''}`}
+        >
+          {isPlaying ? 'Pause' : 'Play'}
+        </button>
+        <button onClick={nextModel} className="model-button">Next</button>
+      </div>
     </div>
   );
 };

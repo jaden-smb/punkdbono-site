@@ -1,23 +1,33 @@
 import { useRef, useEffect } from 'react';
-import { useFrame } from '@react-three/fiber';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import { Group } from 'three';
 import * as THREE from 'three';
 
 // Define prop types for Diorama model
 export interface DioramaModelProps {
-  isRotating: boolean;
   onClick?: () => void;
   onLoad?: () => void;
+  modelIndex?: number;
   [key: string]: any; // For other props that might be passed
 }
 
+// Define available models
+export const MODELS = [
+  '/models/Model_1.glb',
+  '/models/Model_2.glb',
+  '/models/Model_3.glb',
+  '/models/Model_4.glb',
+];
+
 /**
- * 3D Diorama model component with animation and rotation controls
+ * 3D Diorama model component with animation controls
  */
 const DioramaModel = (props: DioramaModelProps) => {
+  // Get current model based on the modelIndex or default to first model
+  const currentModel = MODELS[props.modelIndex || 0];
+  
   // Using useGLTF with Suspense for lazy loading
-  const { scene, animations } = useGLTF('/models/DioramaAnimacion.glb', true);
+  const { scene, animations } = useGLTF(currentModel, true);
   const { actions } = useAnimations(animations, scene);
   const modelRef = useRef<Group>(null);
   
@@ -35,18 +45,16 @@ const DioramaModel = (props: DioramaModelProps) => {
     if (props.onLoad) {
       props.onLoad();
     }
-  }, [actions, props]);
-  
-  // Rotation animation
-  useFrame((_, delta) => {
-    if (!props.isRotating || !modelRef.current) return;
-    modelRef.current.rotation.y += delta * 0.5;
-  });
+  }, [actions, props, currentModel]);
   
   return <primitive ref={modelRef} object={scene} scale={1.2} {...props} />;
 };
 
-// Use automatic asset preloading for better performance after initial load
-useGLTF.preload('/models/DioramaAnimacion.glb');
+// Export a function to preload all models
+export const preloadAllModels = () => {
+  MODELS.forEach(model => {
+    useGLTF.preload(model);
+  });
+};
 
 export default DioramaModel;

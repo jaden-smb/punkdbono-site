@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './GalleryPage.css';
 
 /**
@@ -42,6 +42,12 @@ const GalleryPage = () => {
   const [currentLiveSlide, setCurrentLiveSlide] = useState(0);
   const [currentPhotoSlide, setCurrentPhotoSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  
+  // Initialize video refs array
+  useEffect(() => {
+    videoRefs.current = videoRefs.current.slice(0, liveVideos.length);
+  }, [liveVideos.length]);
   
   // Check if mobile view is active
   useEffect(() => {
@@ -57,11 +63,20 @@ const GalleryPage = () => {
     };
   }, []);
   
+  const pauseCurrentVideo = () => {
+    const currentVideo = videoRefs.current[currentLiveSlide];
+    if (currentVideo && !currentVideo.paused) {
+      currentVideo.pause();
+    }
+  };
+  
   const nextLiveSlide = () => {
+    pauseCurrentVideo();
     setCurrentLiveSlide((prev) => (prev === liveVideos.length - 1 ? 0 : prev + 1));
   };
 
   const prevLiveSlide = () => {
+    pauseCurrentVideo();
     setCurrentLiveSlide((prev) => (prev === 0 ? liveVideos.length - 1 : prev - 1));
   };
 
@@ -86,7 +101,8 @@ const GalleryPage = () => {
         <div className="carousel-container">
           <button className="carousel-button prev" onClick={prevLiveSlide}>❮</button>
           <div className="carousel-slide">
-            {liveVideos.map((video, index) => (                <div
+            {liveVideos.map((video, index) => (
+              <div
                 key={video.id}
                 className={`carousel-item ${index === currentLiveSlide ? 'active' : ''}`}
                 style={{
@@ -95,9 +111,11 @@ const GalleryPage = () => {
                 }}
               >
                 <video
+                  ref={(el) => { videoRefs.current[index] = el; }}
                   src={video.src}
                   controls
                   poster="/images/LOGO-PUNKDBONO.png"
+                  preload="none"
                 >
                   Your browser does not support the video tag.
                 </video>
@@ -120,6 +138,7 @@ const GalleryPage = () => {
               <img
                 src={currentPhoto.src}
                 alt={currentPhoto.alt}
+                loading="lazy"
               />
             </div>
           </div>
