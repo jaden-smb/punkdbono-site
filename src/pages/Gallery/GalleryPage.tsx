@@ -3,6 +3,7 @@ import './GalleryPage.css';
 
 /**
  * Gallery page with live performance carousel and photo grid
+ * Enhanced with punk rock torn paper effect
  */
 const GalleryPage = () => {
   // Use optimized band videos and photos from public folder
@@ -42,7 +43,9 @@ const GalleryPage = () => {
   const [currentLiveSlide, setCurrentLiveSlide] = useState(0);
   const [currentPhotoSlide, setCurrentPhotoSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [distortionValues, setDistortionValues] = useState<number[]>([]);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const intervalRef = useRef<number | null>(null);
   
   // Initialize video refs array
   useEffect(() => {
@@ -62,6 +65,35 @@ const GalleryPage = () => {
       window.removeEventListener('resize', checkMobile);
     };
   }, []);
+  
+  // Initialize random distortion values for each item
+  useEffect(() => {
+    // Generate random distortion values for torn paper effect
+    const generateDistortionValues = () => {
+      const newValues = [];
+      const itemCount = Math.max(liveVideos.length, bandPhotos.length);
+      
+      for (let i = 0; i < itemCount; i++) {
+        // Random values for skew, rotation and edge effects
+        newValues.push(Math.random() * 4 - 2); // Range: -2 to 2 degrees
+      }
+      
+      setDistortionValues(newValues);
+    };
+    
+    generateDistortionValues();
+    
+    // Add random periodic distortion to simulate damaged paper movement
+    intervalRef.current = window.setInterval(() => {
+      generateDistortionValues();
+    }, 5000); // Update every 5 seconds
+    
+    return () => {
+      if (intervalRef.current) {
+        window.clearInterval(intervalRef.current);
+      }
+    };
+  }, [liveVideos.length, bandPhotos.length]);
   
   const pauseCurrentVideo = () => {
     const currentVideo = videoRefs.current[currentLiveSlide];
@@ -91,6 +123,15 @@ const GalleryPage = () => {
   // Only one photo per slide, both desktop and mobile
   const currentPhoto = bandPhotos[currentPhotoSlide];
   
+  // Get random distortion value for current item
+  const getDistortionStyle = (index: number) => {
+    const distortion = distortionValues[index] || 0;
+    return {
+      transform: `rotate(${distortion}deg)`,
+      filter: `brightness(${0.95 + Math.random() * 0.1})` // Slight random brightness variation
+    };
+  };
+  
   return (
     <div className={`gallery-page ${isMobile ? 'mobile-gallery' : ''}`}>
       {/* Live Performance Section (Videos) */}
@@ -98,7 +139,7 @@ const GalleryPage = () => {
         <div className="section-title">
           <h2>LIVEEE!!!</h2>
         </div>
-        <div className="carousel-container">
+        <div className="carousel-container" style={getDistortionStyle(0)}>
           <button className="carousel-button prev" onClick={prevLiveSlide}>❮</button>
           <div className="carousel-slide">
             {liveVideos.map((video, index) => (
@@ -106,8 +147,9 @@ const GalleryPage = () => {
                 key={video.id}
                 className={`carousel-item ${index === currentLiveSlide ? 'active' : ''}`}
                 style={{
-                  transform: `translateX(${100 * (index - currentLiveSlide)}%) scale(${index === currentLiveSlide ? 1 : 0.9}) rotateY(${index === currentLiveSlide ? 0 : (index < currentLiveSlide ? 20 : -20)}deg)`,
-                  transition: 'transform 0.7s cubic-bezier(.77,0,.18,1)'
+                  transform: `translateX(${100 * (index - currentLiveSlide)}%) scale(${index === currentLiveSlide ? 1 : 0.9}) rotateY(${index === currentLiveSlide ? 0 : (index < currentLiveSlide ? 20 : -20)}deg) rotate(${index === currentLiveSlide ? distortionValues[index % distortionValues.length] / 2 : 0}deg)`,
+                  transition: 'transform 0.7s cubic-bezier(.77,0,.18,1)',
+                  filter: index === currentLiveSlide ? `contrast(1.05) brightness(${0.95 + Math.random() * 0.1})` : ''
                 }}
               >
                 <video
@@ -131,14 +173,18 @@ const GalleryPage = () => {
         <div className="section-title">
           <h2>FOTIKOS</h2>
         </div>
-        <div className="photo-gallery">
+        <div className="photo-gallery" style={getDistortionStyle(1)}>
           <button className="gallery-button prev" onClick={prevPhotoSlide}>❮</button>
           <div className="photo-grid">
-            <div className="photo-item">
+            <div className="photo-item" style={getDistortionStyle(currentPhotoSlide)}>
               <img
                 src={currentPhoto.src}
                 alt={currentPhoto.alt}
                 loading="lazy"
+                style={{
+                  transform: `scale(0.98) rotate(${distortionValues[currentPhotoSlide % distortionValues.length] / 3}deg)`,
+                  transition: 'transform 0.7s cubic-bezier(.77,0,.18,1)'
+                }}
               />
             </div>
           </div>

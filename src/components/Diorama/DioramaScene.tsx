@@ -128,7 +128,7 @@ const DioramaScene: React.FC<DioramaSceneProps> = ({ isMobile }) => {
             angle={0.15} 
             penumbra={90} 
             intensity={5.0} 
-            color="#05F2DB"
+            color="#2D8CAC"
             castShadow={false}
           />
           <spotLight 
@@ -136,7 +136,7 @@ const DioramaScene: React.FC<DioramaSceneProps> = ({ isMobile }) => {
             angle={0.2} 
             penumbra={1} 
             intensity={6.0} 
-            color="#F21B07"
+            color="#A73333"
             castShadow={false}
           />
           {/* Additional atmospheric light for gothic effect */}

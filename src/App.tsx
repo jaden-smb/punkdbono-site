@@ -6,6 +6,7 @@ import NewsPage from './pages/News/NewsPage'
 import AboutPage from './pages/About/AboutPage'
 import AudioPlayer from './components/AudioPlayer/AudioPlayer'
 import { AudioProvider } from './contexts/AudioContext'
+import { SmoothScrollProvider } from './contexts/SmoothScrollContext'
 import './App.css'
 
 /**
@@ -16,15 +17,17 @@ function App() {
   return (
     <AudioProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path="gallery" element={<GalleryPage />} />
-            <Route path="news" element={<NewsPage />} />
-            <Route path="about" element={<AboutPage />} />
-          </Route>
-        </Routes>
-        <AudioPlayer />
+        <SmoothScrollProvider>
+          <Routes>
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<HomePage key="home" />} />
+              <Route path="gallery" element={<GalleryPage key="gallery" />} />
+              <Route path="news" element={<NewsPage key="news" />} />
+              <Route path="about" element={<AboutPage key="about" />} />
+            </Route>
+          </Routes>
+          <AudioPlayer />
+        </SmoothScrollProvider>
       </BrowserRouter>
     </AudioProvider>
   )

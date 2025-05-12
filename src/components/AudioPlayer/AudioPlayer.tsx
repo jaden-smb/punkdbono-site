@@ -88,7 +88,7 @@ const AudioPlayer = () => {
   };
 
   return (
-    <div className="audio-player">
+    <div className={`audio-player ${isMobile ? 'mobile' : ''}`}>
       <audio ref={audioRef} src={currentTrack} />
       
       <div className="player-controls">
@@ -109,22 +109,35 @@ const AudioPlayer = () => {
         </button>
       </div>
       
-      <div className="progress-container">
-        <span className="time current">{formatTime(currentTime)}</span>
-        <input
-          type="range"
-          className="progress-bar"
-          min="0"
-          max={duration || 0}
-          value={currentTime}
-          onChange={handleProgress}
-        />
-        <span className="time duration">{formatTime(duration)}</span>
-      </div>
+      {!isMobile ? (
+        <div className="progress-container">
+          <span className="time current">{formatTime(currentTime)}</span>
+          <input
+            type="range"
+            className="progress-bar"
+            min="0"
+            max={duration || 0}
+            value={currentTime}
+            onChange={handleProgress}
+          />
+          <span className="time duration">{formatTime(duration)}</span>
+        </div>
+      ) : (
+        <div className="mobile-info-container">
+          <div className="track-info">
+            <span className="track-name">{getTrackName().slice(0, 15) + '...'}</span>
+          </div>
+          <div className="mobile-time">
+            <span>{formatTime(currentTime)} / {formatTime(duration)}</span>
+          </div>
+        </div>
+      )}
       
-      <div className="track-info">
-        <span className="track-name">{isMobile ? getTrackName().slice(0, 20) : getTrackName()}</span>
-      </div>
+      {!isMobile && (
+        <div className="track-info">
+          <span className="track-name">{getTrackName()}</span>
+        </div>
+      )}
     </div>
   );
 };

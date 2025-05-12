@@ -9,29 +9,28 @@
 
 /* Section Title Styles */
 .live-section .section-title h2 {
-  color: var(--turquoise);
-  text-shadow: 0 0 12px var(--bright-red), 0 0 24px var(--turquoise);
+  color: var(--black);
   letter-spacing: 2px;
   font-weight: 900;
-  -webkit-text-stroke: 2px var(--bright-red);
-  filter: drop-shadow(0 0 8px var(--turquoise));
   transform: skew(-2deg, -2deg);
+  text-shadow: none;
+  -webkit-text-stroke: 0;
+  filter: none;
 }
 
 .photos-section .section-title h2 {
-  color: var(--bright-red);
-  text-shadow: 0 0 12px var(--turquoise), 0 0 24px var(--bright-red);
+  color: var(--black);
   letter-spacing: 2px;
   font-weight: 900;
-  -webkit-text-stroke: 2px var(--turquoise);
-  filter: drop-shadow(0 0 8px var(--bright-red));
   transform: skew(2deg, 2deg);
+  text-shadow: none;
+  -webkit-text-stroke: 0;
+  filter: none;
 }
 
 /* Section Containers */
 .section-container {
   position: relative;
-  margin: 3rem auto;
   padding: 0;
   width: 100%;
 }
@@ -48,7 +47,7 @@
   font-family: var(--font-title);
   font-size: 2.5rem;
   color: #000;
-  background-color: #f5f5dc; /* Light beige background for torn paper effect */
+  background-color: var(--light-gray); /* Using khaki color from the new palette */
   display: inline-block;
   padding: 0.3rem 2.5rem;
   position: relative;
@@ -57,8 +56,52 @@
   transform: rotate(-1deg);
   box-shadow: var(--shadow-sm);
   clip-path: polygon(
-    0% 5%, 5% 0%, 95% 2%, 100% 8%, 
-    98% 95%, 90% 100%, 10% 98%, 0% 90%
+    /* Top edge - realistically torn paper */
+    0% 15%,
+    4% 3%,
+    9% 12%,
+    15% 1%,
+    21% 8%,
+    27% 2%,
+    33% 10%,
+    41% 0%,
+    48% 11%,
+    55% 3%,
+    63% 13%,
+    72% 2%,
+    78% 9%,
+    85% 0%,
+    93% 7%,
+    100% 4%,
+    
+    /* Right edge */
+    100% 83%,
+    97% 90%,
+    100% 95%,
+    
+    /* Bottom edge - torn paper */
+    95% 100%,
+    87% 93%,
+    78% 100%,
+    68% 91%,
+    57% 100%,
+    44% 95%,
+    33% 100%,
+    22% 91%,
+    11% 100%,
+    5% 94%,
+    
+    /* Left edge */
+    0% 100%,
+    2% 90%,
+    0% 83%,
+    3% 77%,
+    0% 70%,
+    1% 63%,
+    0% 55%,
+    3% 47%,
+    0% 37%,
+    2% 25%
   ); /* Rough edges for torn paper effect */
 }
 
@@ -74,7 +117,7 @@
   position: relative;
   margin: 0 auto;
   overflow: hidden;
-  background: #1a1a1a;
+  background: var(--black); /* Using black olive from the new palette */
   padding: 15px;
   box-shadow: var(--shadow-lg);
   z-index: 1;
@@ -89,10 +132,79 @@
   height: 70vh;
   max-height: 600px;
   width: 100%;
-  background: linear-gradient(135deg, var(--black) 60%, var(--turquoise) 100%);
-  border: 4px solid var(--bright-red);
-  box-shadow: 0 0 40px 0 var(--turquoise), 0 0 0 8px var(--black) inset;
-  border-radius: 18px;
+  background: #e8dbb7; /* Flat yellowish paper color */
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  position: relative;
+  clip-path: polygon(
+    /* Top edge - distressed paper tears */
+    0% 3%,
+    4% 0%,
+    7% 5%,
+    12% 1%,
+    16% 6%,
+    21% 0%,
+    25% 4%,
+    30% 1%,
+    35% 7%,
+    41% 2%,
+    46% 5%,
+    50% 0%,
+    55% 6%,
+    60% 1%,
+    66% 7%,
+    71% 2%,
+    76% 5%,
+    81% 0%,
+    86% 6%,
+    92% 1%,
+    97% 4%,
+    100% 2%,
+    
+    /* Right edge - rotten torn edges */
+    100% 91%,
+    97% 94%,
+    100% 98%,
+    
+    /* Bottom edge - heavily damaged torn paper */
+    95% 100%,
+    90% 96%,
+    84% 100%,
+    80% 93%,
+    75% 100%,
+    69% 95%,
+    64% 100%,
+    59% 94%,
+    53% 100%,
+    48% 96%,
+    42% 100%,
+    38% 93%,
+    32% 100%,
+    27% 96%,
+    21% 100%,
+    16% 93%,
+    10% 100%,
+    5% 95%,
+    0% 98%,
+    
+    /* Left edge - distressed paper */
+    3% 94%,
+    0% 90%,
+    4% 85%,
+    0% 78%,
+    3% 72%,
+    0% 65%,
+    2% 59%,
+    0% 50%,
+    3% 43%,
+    0% 36%,
+    4% 30%,
+    0% 22%,
+    3% 15%,
+    0% 9%
+  );
+  overflow: visible;
 }
 
 /* Photo gallery specific */
@@ -100,47 +212,332 @@
   height: 550px;
   margin-top: 5rem;
   width: 100%;
-  background: linear-gradient(135deg, var(--black) 60%, var(--bright-red) 100%);
-  border: 4px solid var(--turquoise);
-  box-shadow: 0 0 40px 0 var(--bright-red), 0 0 0 8px var(--black) inset;
-  border-radius: 18px;
+  background: #d8c89c; /* Slightly darker yellowish paper color */
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  position: relative;
+  clip-path: polygon(
+    /* Top edge - rotting paper tears (more irregular) */
+    0% 5%,
+    3% 0%,
+    8% 6%,
+    13% 1%,
+    17% 7%,
+    22% 0%,
+    28% 5%,
+    33% 0%,
+    37% 6%,
+    42% 1%,
+    48% 7%,
+    54% 0%,
+    59% 5%,
+    65% 1%,
+    70% 6%,
+    75% 0%,
+    79% 7%,
+    85% 2%,
+    90% 8%,
+    94% 1%,
+    100% 4%,
+    
+    /* Right edge - torn with holes */
+    97% 11%,
+    100% 19%,
+    96% 28%,
+    100% 37%,
+    97% 45%,
+    100% 54%,
+    96% 63%,
+    100% 71%,
+    97% 80%,
+    100% 88%,
+    
+    /* Bottom edge - heavily damaged torn paper */
+    96% 100%,
+    91% 95%,
+    85% 100%,
+    79% 94%,
+    73% 100%,
+    67% 96%,
+    61% 100%,
+    55% 93%,
+    49% 100%,
+    44% 95%,
+    37% 100%,
+    31% 94%,
+    25% 100%,
+    19% 96%,
+    12% 100%,
+    7% 95%,
+    0% 100%,
+    
+    /* Left edge - rotting edges */
+    3% 92%,
+    0% 83%,
+    4% 75%,
+    0% 67%,
+    3% 58%,
+    0% 50%,
+    2% 42%,
+    0% 34%,
+    4% 25%,
+    0% 16%
+  );
+  overflow: visible;
 }
 
-/* Torn paper edge effect for containers */
+/* Remove the pseudo-elements that were used previously for paper effect */
 .carousel-container:before,
 .carousel-container:after,
 .photo-gallery:before,
 .photo-gallery:after {
+  display: none;
+}
+
+/* Add torn paper texture */
+.carousel-container::before,
+.photo-gallery::before {
   content: "";
   position: absolute;
-  width: 100px;
-  height: 20px;
-  background: #1a1a1a;
-  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23b5a575' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E"),
+    linear-gradient(45deg, rgba(139, 69, 19, 0.05) 25%, transparent 25%, transparent 50%, rgba(139, 69, 19, 0.05) 50%, rgba(139, 69, 19, 0.05) 75%, transparent 75%, transparent);
+  background-size: 100px 100px, 10px 10px;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.carousel-container:before {
-  top: -5px;
-  left: 20%;
-  transform: rotate(2deg);
+/* Additional rotten paper stains */
+.carousel-container::after,
+.photo-gallery::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: radial-gradient(
+    circle at 20% 30%, 
+    rgba(160, 82, 45, 0.1) 0%, 
+    transparent 25%
+  ),
+  radial-gradient(
+    circle at 70% 65%, 
+    rgba(101, 67, 33, 0.15) 0%, 
+    transparent 30%
+  ),
+  radial-gradient(
+    circle at 40% 80%, 
+    rgba(139, 69, 19, 0.1) 0%, 
+    transparent 40%
+  ),
+  radial-gradient(
+    circle at 80% 40%, 
+    rgba(160, 120, 80, 0.1) 0%, 
+    transparent 30%
+  );
+  filter: blur(2px);
+  z-index: -1;
 }
 
-.carousel-container:after {
-  top: -8px;
-  right: 30%;
-  transform: rotate(-5deg);
+/* Rotten edge accents at random spots */
+.carousel-container::before {
+  background-image: 
+    radial-gradient(circle at 15% 10%, rgba(139, 101, 8, 0.15) 0%, transparent 25%),
+    radial-gradient(circle at 85% 20%, rgba(160, 120, 80, 0.2) 0%, transparent 30%),
+    radial-gradient(circle at 75% 80%, rgba(101, 67, 33, 0.15) 0%, transparent 25%),
+    radial-gradient(circle at 25% 90%, rgba(139, 101, 8, 0.1) 0%, transparent 20%),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23b5a575' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100px 100px;
+  opacity: 1;
 }
 
+.photo-gallery::before {
+  background-image: 
+    radial-gradient(circle at 25% 15%, rgba(160, 120, 80, 0.2) 0%, transparent 30%),
+    radial-gradient(circle at 75% 25%, rgba(139, 101, 8, 0.15) 0%, transparent 30%),
+    radial-gradient(circle at 65% 75%, rgba(101, 67, 33, 0.15) 0%, transparent 30%),
+    radial-gradient(circle at 35% 85%, rgba(139, 101, 8, 0.1) 0%, transparent 25%),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23b5a575' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100px 100px;
+  opacity: 1;
+}
+
+/* Rotten leaf effects - NEW */
+/* Leaf base class */
+.carousel-container::after,
+.photo-gallery::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Generate leaves for carousel container */
+.carousel-container:hover {
+  filter: none;
+}
+
+/* Generate the leaf decorations */
+.section-container {
+  --leaf-color-1: rgba(95, 58, 10, 0.7);  /* Dark brown */
+  --leaf-color-2: rgba(121, 85, 32, 0.6); /* Medium brown */
+  --leaf-color-3: rgba(160, 120, 34, 0.5); /* Light brown */
+  --leaf-color-4: rgba(73, 51, 21, 0.65); /* Very dark brown */
+}
+
+/* Leaf pseudo-elements */
+.carousel-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Add leaf elements around carousel and photo gallery */
+.carousel-container:before,
 .photo-gallery:before {
-  top: -6px;
-  left: 35%;
-  transform: rotate(-3deg);
+  background-image:
+    /* Leaf shapes using SVG data URLs */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 100 100'%3E%3Cpath d='M10,50 Q30,30 50,50 Q70,70 50,90 Q30,70 10,50 Z' fill='rgba(95, 58, 10, 0.3)' /%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 100 100'%3E%3Cpath d='M20,20 Q40,5 60,20 Q80,40 60,70 Q40,90 20,70 Q5,40 20,20 Z' fill='rgba(121, 85, 32, 0.25)' /%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 100 100'%3E%3Cpath d='M30,10 Q50,30 70,10 Q90,30 70,50 Q50,70 30,50 Q10,30 30,10 Z' fill='rgba(73, 51, 21, 0.2)' /%3E%3C/svg%3E"),
+    
+    /* Original paper texture background */
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23b5a575' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-position: 
+    left -10px top -5px,  /* First leaf position */
+    right -20px top 30%,  /* Second leaf position */
+    left 40% bottom -15px, /* Third leaf position */
+    center center;        /* Paper texture */
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-size: 
+    60px 60px,  /* First leaf size */
+    70px 70px,  /* Second leaf size */
+    50px 50px,  /* Third leaf size */
+    100px 100px; /* Paper texture */
 }
 
-.photo-gallery:after {
-  top: -4px;
-  right: 25%;
-  transform: rotate(4deg);
+/* Add edge leaf decorations */
+.carousel-container::after,
+.photo-gallery::after {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  z-index: -1;
+  filter: blur(2px);
+  background-image:
+    /* More leaf elements around the borders using SVG */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 100 100'%3E%3Cpath d='M20,30 Q40,10 60,30 Q80,50 60,80 Q40,90 20,70 Q10,50 20,30 Z' fill='rgba(95, 58, 10, 0.2)' /%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 100 100'%3E%3Cpath d='M30,20 Q45,5 60,20 Q75,35 60,60 Q45,75 30,60 Q15,45 30,20 Z' fill='rgba(73, 51, 21, 0.15)' /%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70' viewBox='0 0 100 100'%3E%3Cpath d='M25,25 Q40,10 55,25 Q70,40 55,70 Q40,85 25,70 Q10,55 25,25 Z' fill='rgba(121, 85, 32, 0.2)' /%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 100 100'%3E%3Cpath d='M30,10 Q50,30 70,10 Q90,30 70,50 Q50,70 30,50 Q10,30 30,10 Z' fill='rgba(160, 120, 34, 0.15)' /%3E%3C/svg%3E");
+  background-position: 
+    left -30px top 20%,     /* Bottom left leaf */
+    right -25px top -20px,  /* Top right leaf */
+    right -20px bottom -25px, /* Bottom right leaf */
+    left -15px bottom 30%;  /* Left side leaf */
+  background-repeat: no-repeat;
+  background-size: 
+    80px 80px,
+    60px 60px,
+    70px 70px,
+    50px 50px;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Add subtle leaf shadow and effect to photo gallery */
+.photo-gallery::after {
+  background-position: 
+    left -20px bottom 10%, /* Different positioning for photo gallery */
+    right -15px top 10%,
+    right -30px bottom -15px,
+    left 20% top -20px;
+  opacity: 0.9;
+}
+
+/* Add some rotated and sized variations for more natural look */
+.live-section .carousel-container::after {
+  transform: rotate(5deg);
+}
+
+.photos-section .photo-gallery::after {
+  transform: rotate(-8deg);
+}
+
+/* Add additional leaf elements with absolute positioning */
+.carousel-container,
+.photo-gallery {
+  position: relative;
+  overflow: visible; /* Allow leaves to extend outside */
+}
+
+/* Rotten leaf decorative elements */
+.section-container::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 100 100'%3E%3Cpath d='M30,10 Q50,30 70,10 Q90,30 70,50 Q50,70 30,50 Q10,30 30,10 Z' fill='rgba(73, 51, 21, 0.3)' /%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  transform: rotate(45deg);
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.7;
+  margin-top: -30px;
+}
+
+/* Responsive adjustments for leaf decorations */
+@media (max-width: 768px) {
+  .carousel-container::after,
+  .photo-gallery::after {
+    background-size: 
+      60px 60px,
+      45px 45px,
+      50px 50px,
+      40px 40px;
+  }
+  
+  .section-container::before {
+    width: 30px;
+    height: 30px;
+    margin-top: -20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-container::before,
+  .photo-gallery::before,
+  .carousel-container::after,
+  .photo-gallery::after {
+    background-size: 
+      40px 40px,
+      35px 35px,
+      40px 40px,
+      30px 30px;
+  }
+  
+  .section-container::before {
+    width: 25px;
+    height: 25px;
+    margin-top: -15px;
+  }
 }
 
 /* Carousel Slide */
@@ -154,22 +551,21 @@
 /* Carousel items */
 .carousel-item {
   position: absolute;
-  top: 0;
+  top: 5%; /* Adjust to account for top torn edges */
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 90%; /* Reduce height to ensure content fits within torn edges */
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.7s cubic-bezier(.77,0,.18,1);
-  border-radius: 12px;
   overflow: hidden;
   background: var(--black);
   padding: 10px;
 }
 
 .carousel-item.active {
-  box-shadow: 0 0 32px 0 var(--turquoise);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   z-index: 2;
   width: 90%;
   max-width: 1000px;
@@ -182,8 +578,8 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  border-radius: 12px;
-  border: 2px solid var(--turquoise);
+  border-radius: 0;
+  border: 5px solid #c0aa71; /* Yellowish border color */
   background: var(--black);
   max-height: 560px;
 }
@@ -201,7 +597,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--light-gray);
+  color: var(--black);
   border: none;
   width: 60px;
   height: 60px;
@@ -212,17 +608,17 @@
   background: none;
   line-height: 0.5;
   padding: 0;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+  text-shadow: none;
 }
 
 .carousel-button {
-  color: var(--turquoise);
-  text-shadow: 0 0 8px var(--bright-red);
+  color: var(--black);
+  text-shadow: none;
 }
 
 .gallery-button {
-  color: var(--bright-red);
-  text-shadow: 0 0 8px var(--turquoise);
+  color: var(--black);
+  text-shadow: none;
 }
 
 .carousel-button.prev,
@@ -280,40 +676,18 @@
 
 .photo-item {
   flex: 1;
-  height: 100%;
+  height: 90%; /* Reduce height to ensure content fits within torn edges */
+  margin-top: 5%; /* Offset from top to account for torn edges */
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
-  box-shadow: 0 0 32px 0 var(--turquoise);
   overflow: hidden;
   background: var(--black);
   border: 2px solid var(--bright-red);
-  width: 80%; /* Control width of the photo */
+  width: 80%;
   max-width: 900px;
-  margin: 0 auto;
-}
-
-.photo-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 0 24px 0 var(--turquoise);
-  border: 2px solid var(--turquoise);
-  background: var(--black);
-}
-
-.photo-item {
-  flex: 1;
-  height: 100%;
-  border-right: 2px solid #222;
-  overflow: hidden;
-  position: relative;
-}
-
-.photo-item:last-child {
-  border-right: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .photo-item img {
@@ -521,15 +895,42 @@
     margin-bottom: -20px;
   }
   
-  .carousel-container {
-    height: 50vh;
-    max-height: 400px;
-    padding: 12px;
+  .carousel-container, .photo-gallery {
+    /* Simplified clip-path for mobile */
+    clip-path: polygon(
+      /* Top edge - simpler but still torn */
+      0% 3%,
+      10% 0%,
+      20% 4%,
+      30% 1%,
+      40% 5%,
+      50% 0%,
+      60% 4%,
+      70% 1%,
+      80% 5%,
+      90% 0%,
+      100% 3%,
+      
+      /* Right edge */
+      100% 95%,
+      
+      /* Bottom edge */
+      90% 100%,
+      80% 96%,
+      70% 100%,
+      60% 95%,
+      50% 100%,
+      40% 96%,
+      30% 100%,
+      20% 96%,
+      10% 100%,
+      0% 95%
+    );
   }
   
-  .photo-gallery {
-    height: 350px;
-    padding: 12px;
+  .carousel-item, .photo-item {
+    height: 88%;
+    top: 6%;
   }
   
   .carousel-button,
@@ -592,11 +993,30 @@
     margin-bottom: -10px;
   }
 
-  .carousel-container {
-    height: 35vh;
-    max-height: 230px;
-    padding: 5px;
-    margin-top: 15px;
+  .carousel-container, .photo-gallery {
+    /* Even simpler clip-path for small mobile */
+    clip-path: polygon(
+      /* Top edge - minimally torn for small screens */
+      0% 2%,
+      20% 0%,
+      40% 3%,
+      60% 0%,
+      80% 2%,
+      100% 0%,
+      
+      /* Right & bottom & left edges - simpler */
+      100% 96%,
+      80% 100%,
+      60% 97%,
+      40% 100%,
+      20% 97%,
+      0% 100%
+    );
+  }
+  
+  .carousel-item, .photo-item {
+    height: 92%;
+    top: 4%;
   }
   
   .carousel-button,

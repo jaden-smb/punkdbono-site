@@ -1,16 +1,16 @@
 /* Central location for all CSS variables */
 :root {
   /* Colors */
-  --turquoise: #05F2DB;
-  --dark-brown: #730C02;
-  --bright-red: #F21B07;
-  --light-gray: #F2F2F2;
-  --black: #0D0D0D;
+  --turquoise: #2D8CAC; /* Bondi blue (previously turquoise) */
+  --dark-brown: #3C8D96; /* Dark cyan (previously dark brown) */
+  --bright-red: #A73333; /* Auburn (previously bright red) */
+  --light-gray: #C1B2A5; /* Khaki (previously light gray) */
+  --black: #3F4441; /* Black olive (previously black) */
   
   /* Shadows */
-  --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 2px 5px rgba(63, 68, 65, 0.3);
+  --shadow-md: 0 5px 15px rgba(63, 68, 65, 0.4);
+  --shadow-lg: 0 10px 30px rgba(63, 68, 65, 0.5);
   
   /* Transitions */
   --transition-fast: all 0.2s ease;
