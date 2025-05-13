@@ -3,6 +3,9 @@ import { useSmoothScroll } from '../../contexts/SmoothScrollContext';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { rockMemberEntry, glitchEffect, distortionEffect } from '../../utils/animations';
+import cenizaImage from '/images/illustrations/cenizapunk.png';
+import calacaImage from '/images/illustrations/calaca.png';
+import bajoImage from '/images/illustrations/bajo.png';
 import './AboutPage.css';
 
 /**
@@ -11,6 +14,7 @@ import './AboutPage.css';
 const AboutPage = () => {
   const { lenis, refresh } = useSmoothScroll();
   const [isInitialized, setIsInitialized] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const pageHeaderRef = useRef<HTMLDivElement>(null);
   const bandDescriptionRef = useRef<HTMLParagraphElement>(null);
   const bandSectionRef = useRef<HTMLElement>(null);
@@ -18,6 +22,9 @@ const AboutPage = () => {
   const memberRefs = useRef<Array<HTMLDivElement | null>>([]);
   const imageSectionRefs = useRef<Array<HTMLDivElement | null>>([]);
   const nameRefs = useRef<Array<HTMLHeadingElement | null>>([]);
+  const cenizaRef = useRef<HTMLImageElement>(null);
+  const calacaRef = useRef<HTMLImageElement>(null);
+  const bajoRef = useRef<HTMLImageElement>(null);
   
   // Create ref callbacks
   const setMemberRef: (index: number) => RefCallback<HTMLDivElement> = (index) => (el) => {
@@ -59,6 +66,17 @@ const AboutPage = () => {
     imageSectionRefs.current = imageSectionRefs.current.slice(0, bandMembers.length);
     nameRefs.current = nameRefs.current.slice(0, bandMembers.length);
   }, [bandMembers.length]);
+  
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   // Initialize animations
   useEffect(() => {
@@ -316,6 +334,103 @@ const AboutPage = () => {
         }
       });
       
+      // Animate illustrations
+      if (cenizaRef.current) {
+        gsap.fromTo(
+          cenizaRef.current,
+          {
+            opacity: 0,
+            x: -100,
+            y: 50,
+            rotation: -15,
+            scale: 0.8
+          },
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            rotation: 0,
+            scale: 1,
+            duration: 1.2,
+            ease: 'back.out(1.7)',
+            delay: 0.3
+          }
+        );
+
+        // Add floating animation
+        gsap.to(cenizaRef.current, {
+          y: -10,
+          duration: 2.5,
+          repeat: -1,
+          yoyo: true,
+          ease: 'power1.inOut'
+        });
+      }
+
+      if (calacaRef.current) {
+        gsap.fromTo(
+          calacaRef.current,
+          {
+            opacity: 0,
+            x: 100,
+            y: 50,
+            rotation: 15,
+            scale: 0.8
+          },
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            rotation: 0,
+            scale: 1,
+            duration: 1.2,
+            ease: 'back.out(1.7)',
+            delay: 0.5
+          }
+        );
+
+        // Add floating animation with different timing
+        gsap.to(calacaRef.current, {
+          y: -15,
+          duration: 2,
+          repeat: -1,
+          yoyo: true,
+          ease: 'power1.inOut'
+        });
+      }
+
+      if (bajoRef.current) {
+        gsap.fromTo(
+          bajoRef.current,
+          {
+            opacity: 0,
+            x: 0,
+            y: 100,
+            rotation: 0,
+            scale: 0.8
+          },
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            rotation: 0,
+            scale: 1,
+            duration: 1.2,
+            ease: 'back.out(1.7)',
+            delay: 0.7
+          }
+        );
+
+        // Add floating animation with different timing
+        gsap.to(bajoRef.current, {
+          y: -12,
+          duration: 2.2,
+          repeat: -1,
+          yoyo: true,
+          ease: 'power1.inOut'
+        });
+      }
+      
       // Refresh ScrollTrigger when animations are set up
       ScrollTrigger.refresh();
       setIsInitialized(true);
@@ -348,6 +463,26 @@ const AboutPage = () => {
     <div className="about-page">
       <div className="page-header" ref={pageHeaderRef}>
         <h1>About PunkD'Bono</h1>
+        
+        {/* Add Ceniza illustration */}
+        <img 
+          ref={cenizaRef}
+          src={cenizaImage} 
+          alt="Ceniza Punk" 
+          className="about-illustration ceniza"
+          style={{
+            position: 'absolute',
+            top: isMobile ? '280px' : '300px',
+            left: isMobile ? '-9px' : '-60px',
+            width: isMobile ? '120px' : '220px',
+            zIndex: 10,
+            pointerEvents: 'none',
+            transform: isMobile ? 'scale(0.8)' : 'scale(1)',
+            transition: 'all 0.1s ease-in-out',
+            opacity: 0.9
+          }}
+        />
+        
         <p className="band-description" ref={bandDescriptionRef}>
           Somos un grupo de desgraciados que se supone que hace música, nuestro sonido es una combinación de Punk, Metal y Ska, hablamos de lo que se nos da la gana y esperamos que ustedes se contagien de nuestras putridas canciones.
         </p>
@@ -355,6 +490,43 @@ const AboutPage = () => {
       
       <section className="band-members" ref={bandSectionRef}>
         <h2 ref={bandSectionTitleRef}>Meet The Band</h2>
+        
+        {/* Add Calaca illustration */}
+        <img 
+          ref={calacaRef}
+          src={calacaImage} 
+          alt="Calaca" 
+          className="about-illustration calaca"
+          style={{
+            position: 'absolute',
+            top: isMobile ? '40%' : '50%',
+            right: isMobile ? '10px' : '30px',
+            width: isMobile ? '130px' : '230px',
+            zIndex: 10,
+            pointerEvents: 'none',
+            transform: isMobile ? 'scale(0.8)' : 'scale(1)',
+            transition: 'all 0.3s ease-in-out'
+          }}
+        />
+        
+        {/* Add Bajo illustration */}
+        <img 
+          ref={bajoRef}
+          src={bajoImage} 
+          alt="Bajo" 
+          className="about-illustration bajo"
+          style={{
+            position: 'absolute',
+            bottom: isMobile ? '10px' : '30px',
+            left: isMobile ? '10px' : '30px',
+            width: isMobile ? '140px' : '240px',
+            zIndex: 10,
+            pointerEvents: 'none',
+            transform: isMobile ? 'scale(0.8)' : 'scale(1)',
+            transition: 'all 0.3s ease-in-out'
+          }}
+        />
+        
         <div className="band-section-container">
           <div className="members-grid">
             {bandMembers.map((member, index) => (

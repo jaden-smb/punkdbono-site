@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import DioramaScene from '../../components/Diorama/DioramaScene';
-// Changed from direct import to URL reference
 import bandImage from '/images/INICIO-BANDA.png';
+import guitarraImage from '/images/illustrations/guitarra.png';
 import './HomePage.css';
 import { useSmoothScroll } from '../../contexts/SmoothScrollContext';
 import { gsap } from 'gsap';
@@ -31,6 +31,7 @@ const HomePage = () => {
   const threesixtyRef = useRef<HTMLDivElement>(null);
   const videoTitleRef = useRef<HTMLHeadingElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
+  const guitarraRef = useRef<HTMLImageElement>(null);
   
   // Check if device is mobile
   useEffect(() => {
@@ -310,6 +311,39 @@ const HomePage = () => {
         }
       }
       
+      // Animate guitarra illustration
+      if (guitarraRef.current) {
+        gsap.fromTo(
+          guitarraRef.current,
+          {
+            opacity: 0,
+            x: 100,
+            y: -50,
+            rotation: 15,
+            scale: 0.8
+          },
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            rotation: 0,
+            scale: 1,
+            duration: 1.2,
+            ease: 'back.out(1.7)',
+            delay: 0.5
+          }
+        );
+
+        // Add floating animation
+        gsap.to(guitarraRef.current, {
+          y: -15,
+          duration: 2,
+          repeat: -1,
+          yoyo: true,
+          ease: 'power1.inOut'
+        });
+      }
+      
       // Force GSAP to recalculate positions
       gsap.delayedCall(0.1, () => {
         ScrollTrigger.refresh();
@@ -358,6 +392,24 @@ const HomePage = () => {
       <div className="content-section">
         <div className="diorama-section section-container" ref={dioramaRef}>
           <h2 className="section-title-home" ref={dioramaTitleRef}>DIORAMA</h2>
+          
+          {/* Add guitarra illustration */}
+          <img 
+            ref={guitarraRef}
+            src={guitarraImage} 
+            alt="Guitarra Illustration" 
+            className="diorama-illustration"
+            style={{
+              position: 'absolute',
+              top: isMobile ? '-40px' : '30px',
+              right: isMobile ? '10px' : '30px',
+              width: isMobile ? '200px' : '200px',
+              zIndex: 100,
+              pointerEvents: 'none',
+              transform: isMobile ? 'scale(0.8)' : 'scale(1)',
+              transition: 'all 0.3s ease-in-out'
+            }}
+          />
           
           {/* 3D Diorama */}
           <div className="diorama-wrapper">
