@@ -471,11 +471,10 @@ const AboutPage = () => {
           alt="Ceniza Punk" 
           className="about-illustration ceniza"
           style={{
-            position: 'absolute',
-            top: isMobile ? '280px' : '300px',
+            top: isMobile ? '343px' : '300px',
             left: isMobile ? '-9px' : '-60px',
-            width: isMobile ? '120px' : '220px',
-            zIndex: 10,
+            width: isMobile ? '250px' : '250px',
+            zIndex: 100,
             pointerEvents: 'none',
             transform: isMobile ? 'scale(0.8)' : 'scale(1)',
             transition: 'all 0.1s ease-in-out',
