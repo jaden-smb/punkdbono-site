@@ -46,7 +46,6 @@ body, html {
 
 /* Common component styles that don't belong to specific components */
 .hero-section {
-  padding: 2rem;
   text-align: center;
   margin-bottom: 1rem;
 }

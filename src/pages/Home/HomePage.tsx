@@ -73,7 +73,8 @@ const HomePage = () => {
       // Initial page entrance animation
       const heroImage = heroRef.current?.querySelector('.band-image');
       if (heroImage) {
-        rockEntrance(heroImage);
+        // Adjust entrance animation for mobile
+        rockEntrance(heroImage, isMobile ? 0.2 : 0);
       }
       
       // Scroll-triggered animations
@@ -349,7 +350,7 @@ const HomePage = () => {
         <img 
           src={bandImage} 
           alt="PunkD'Bono Band" 
-          className="band-image" 
+          className={`band-image ${isMobile ? 'mobile-band-image' : ''}`} 
           loading="eager"
         />
       </div>
@@ -364,10 +365,10 @@ const HomePage = () => {
             
             <div className="diorama-text" ref={dioramaTextRef}>
               <p>
-                Explora el universo de nuestra banda a través de este diorama 3D interactivo.
+                Oee interactúe con este diorama 3D representando el lugar favorito de los miembros de PunkD'Bono.
                 {isMobile ? 
                   " Toca y arrastra para rotar la escena. Pellizca para acercar y alejar." : 
-                  " Usa tu ratón para rotar la escena. Mantén presionado el clic izquierdo y arrastra para moverte. Desplázate para acercar y alejar."
+                  " Mantén presionado el eje izquierdo y arrastra para moverte. Desplázate para acerca y alejar."
                 }
               </p>
             </div>
@@ -383,7 +384,6 @@ const HomePage = () => {
         </div>
         
         <div className="video-section section-container">
-          <h2 className="section-title-home" ref={videoTitleRef}>VIDEO</h2>
           <div className="video-container" ref={videoContainerRef}>
             <iframe 
               width="100%" 

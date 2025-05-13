@@ -634,10 +634,10 @@
 
 .diorama-activate-button {
   position: relative;
-  background: linear-gradient(45deg, var(--black) 0%, var(--dark-brown) 100%);
-  color: var(--turquoise);
-  border: 3px solid var(--bright-red);
-  border-radius: 15px;
+  background: var(--black);
+  color: var(--light-gray);
+  border: 2px solid var(--turquoise);
+  border-radius: 8px;
   padding: 0;
   width: 220px;
   height: 220px;
@@ -651,15 +651,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transform-style: preserve-3d;
-  transform: perspective(1000px) rotateX(10deg);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 
-    0 15px 0 var(--dark-brown),
-    0 15px 30px rgba(0, 0, 0, 0.8),
-    inset 0 2px 20px rgba(242, 27, 7, 0.5),
-    0 0 30px rgba(5, 242, 219, 0.3);
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .diorama-activate-button:before {
@@ -669,33 +662,20 @@
   left: 0;
   width: 100%;
   height: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px 12px 0 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px 6px 0 0;
   z-index: -1;
 }
 
 .diorama-activate-button:after {
-  content: '';
-  position: absolute;
-  width: 150%;
-  height: 150%;
-  background: radial-gradient(ellipse at center, rgba(5, 242, 219, 0.3) 0%, rgba(5, 242, 219, 0) 70%);
-  top: -25%;
-  left: -25%;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: -2;
+  content: none;
 }
 
 .button-icon {
   font-size: 80px;
   margin-bottom: 15px;
   display: block;
-  color: var(--bright-red);
-  text-shadow: 
-    0 0 15px var(--bright-red),
-    0 0 30px rgba(242, 27, 7, 0.5);
+  color: var(--turquoise);
   transition: transform 0.3s ease;
   line-height: 1;
 }
@@ -706,51 +686,35 @@
   display: block;
   width: 100%;
   text-align: center;
-  color: var(--turquoise);
+  color: var(--light-gray);
   padding: 0 10px;
   margin-top: 5px;
   z-index: 2;
   position: relative;
-  text-shadow: 
-    0 0 10px rgba(5, 242, 219, 0.5),
-    1px 1px 2px rgba(0, 0, 0, 0.8);
-  overflow: visible;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 .diorama-activate-button:hover {
-  transform: perspective(1000px) rotateX(15deg) translateY(-10px);
-  box-shadow: 
-    0 25px 0 var(--dark-brown),
-    0 25px 40px rgba(0, 0, 0, 0.8),
-    inset 0 2px 30px rgba(242, 27, 7, 0.7),
-    0 0 40px rgba(5, 242, 219, 0.5);
-  border-color: var(--turquoise);
+  background: var(--dark-brown);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .diorama-activate-button:hover:after {
-  opacity: 1;
+  opacity: 0;
 }
 
 .diorama-activate-button:hover .button-icon {
-  transform: scale(1.1);
-  color: var(--turquoise);
-  text-shadow: 
-    0 0 15px var(--turquoise),
-    0 0 30px rgba(5, 242, 219, 0.8);
+  transform: scale(1.05);
+  color: var(--light-gray);
 }
 
 .diorama-activate-button:hover .button-text {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .diorama-activate-button:active {
-  transform: perspective(1000px) rotateX(0deg) translateY(10px);
-  box-shadow: 
-    0 5px 0 var(--dark-brown),
-    0 5px 10px rgba(0, 0, 0, 0.8),
-    inset 0 2px 10px rgba(242, 27, 7, 0.8);
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   transition: all 0.1s ease;
 }
 

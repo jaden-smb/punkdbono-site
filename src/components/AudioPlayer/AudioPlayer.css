@@ -4,7 +4,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: var(--light-gray);
+  background-color: white;
   border-top: 2px solid var(--turquoise);
   padding: 10px 20px;
   display: flex;
@@ -28,7 +28,7 @@
   border: 2px solid var(--turquoise);
   border-radius: 8px;
   cursor: pointer;
-  color: var(--light-gray);
+  color: white;
   padding: 5px 10px;
   display: flex;
   align-items: center;

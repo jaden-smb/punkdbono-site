@@ -96,7 +96,7 @@ const DioramaScene: React.FC<DioramaSceneProps> = ({ isMobile }) => {
             aria-label="Activate 3D Diorama"
           >
             <div className="button-icon">▶</div>
-            <div className="button-text">PLAYYY</div>
+            <div className="button-text">Dele playyy</div>
           </button>
         </div>
       </div>
@@ -122,45 +122,46 @@ const DioramaScene: React.FC<DioramaSceneProps> = ({ isMobile }) => {
             speed={1}
           />
           
-          <ambientLight intensity={2.0} /> {/* Increased ambient light for full illumination */}
+          <ambientLight intensity={1.0} /> {/* Reduced ambient light intensity */}
           <spotLight 
             position={[10, 15, 10]} 
             angle={0.15} 
             penumbra={90} 
-            intensity={5.0} 
-            color="#2D8CAC"
+            intensity={1.5} 
+            color="#ffffff"
             castShadow={false}
           />
           <spotLight 
             position={[-10, -5, -10]} 
             angle={0.2} 
             penumbra={1} 
-            intensity={6.0} 
-            color="#A73333"
+            intensity={1.5} 
+            color="#ffffff"
             castShadow={false}
           />
-          {/* Additional atmospheric light for gothic effect */}
+          
+          {/* Subtle fill light */}
           <pointLight
             position={[0, 10, 0]}
-            intensity={2.5}
-            color="#8A2BE2" // Purple hue for gothic atmosphere
+            intensity={1.0}
+            color="#ffffff"
             distance={900}
             decay={2}
           />
           
-          {/* Additional fill light to brighten dark areas */}
+          {/* Additional fill light */}
           <pointLight
             position={[0, -5, 0]}
-            intensity={2.0}
+            intensity={1.0}
             color="#ffffff"
             distance={15}
             decay={2}
           />
           
-          {/* Add more fill lights to eliminate all shadows */}
+          {/* Add more fill lights with neutral colors */}
           <pointLight
             position={[5, 0, 5]}
-            intensity={2.0}
+            intensity={1.0}
             color="#ffffff"
             distance={90}
             decay={2}
@@ -168,7 +169,7 @@ const DioramaScene: React.FC<DioramaSceneProps> = ({ isMobile }) => {
           
           <pointLight
             position={[-3, 0, -5]}
-            intensity={2.0}
+            intensity={1.0}
             color="#ffffff"
             distance={90}
             decay={2}
@@ -212,12 +213,6 @@ const DioramaScene: React.FC<DioramaSceneProps> = ({ isMobile }) => {
       
       <div className="model-controls">
         <button onClick={prevModel} className="model-button">Previous</button>
-        <button 
-          onClick={togglePlayback} 
-          className={`model-button ${isPlaying ? 'active' : ''}`}
-        >
-          {isPlaying ? 'Pause' : 'Play'}
-        </button>
         <button onClick={nextModel} className="model-button">Next</button>
       </div>
     </div>

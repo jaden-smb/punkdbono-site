@@ -9,7 +9,6 @@
 /* Page Header */
 .page-header {
   text-align: center;
-  margin-bottom: 3rem;
 }
 
 .page-header h1 {
@@ -178,10 +177,6 @@
 @media (max-width: 768px) {
   .news-page {
     padding: 1.5rem;
-  }
-  
-  .page-header {
-    margin-bottom: 2.5rem;
   }
   
   .page-header h1 {
