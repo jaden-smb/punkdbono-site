@@ -34,8 +34,7 @@ const LoadingSpinner = () => {
           </div>
         </div>
         
-        <h3 className="loading-text">Loading Diorama</h3>
-        <p className="loading-subtext">Get ready to rock...</p>
+        <h3 className="loading-text">Tengalo que ya está cargando</h3>
       </div>
     </div>
   );
