@@ -401,8 +401,8 @@ const HomePage = () => {
             className="diorama-illustration"
             style={{
               position: 'absolute',
-              top: isMobile ? '-40px' : '30px',
-              right: isMobile ? '10px' : '30px',
+              top: isMobile ? '-9px' : '30px',
+              right: isMobile ? '-50px' : '30px',
               width: isMobile ? '200px' : '200px',
               zIndex: 100,
               pointerEvents: 'none',
